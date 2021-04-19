@@ -1,0 +1,67 @@
+2021-04-06 14:01:52.878 [FATA] SetServerRoot failed: cannot find file/folder "/public" in following paths:
+1. /home/prcups/Projects/NatsunaBlog 
+Stack:
+1.  github.com/gogf/gf/net/ghttp.(*Server).SetServerRoot
+    /home/prcups/go/pkg/mod/github.com/gogf/gf@v1.15.3/net/ghttp/ghttp_server_config_static.go:56
+2.  NatsunaBlog/boot.init.0
+    /home/prcups/Projects/NatsunaBlog/boot/boot.go:9
+
+2021-04-06 14:02:11.839 [DEBU] SetServerRoot path: /home/prcups/Projects/NatsunaBlog/public
+2021-04-06 14:02:11.839 [FATA] AddStaticPath failed: cannot find file/folder "/static" in following paths:
+1. /home/prcups/Projects/NatsunaBlog 
+Stack:
+1.  github.com/gogf/gf/net/ghttp.(*Server).AddStaticPath
+    /home/prcups/go/pkg/mod/github.com/gogf/gf@v1.15.3/net/ghttp/ghttp_server_config_static.go:85
+2.  NatsunaBlog/router.init.0
+    /home/prcups/Projects/NatsunaBlog/router/router.go:15
+
+2021-04-06 14:02:23.945 [DEBU] SetServerRoot path: /home/prcups/Projects/NatsunaBlog/public
+2021-04-06 14:02:23.946 90516: http server started listening on [:8199]
+
+  SERVER  | DOMAIN  | ADDRESS | METHOD |         ROUTE         |                 HANDLER                 |   MIDDLEWARE     
+|---------|---------|---------|--------|-----------------------|-----------------------------------------|-----------------|
+  default | default | :8199   | POST   | /ava-api/check        | NatsunaBlog/app/api/check.Check         | middleware.CORS  
+|---------|---------|---------|--------|-----------------------|-----------------------------------------|-----------------|
+  default | default | :8199   | GET    | /ava-api/get-page-num | NatsunaBlog/app/service/post.GetPageNum | middleware.CORS  
+|---------|---------|---------|--------|-----------------------|-----------------------------------------|-----------------|
+  default | default | :8199   | GET    | /ava-api/get-posts    | NatsunaBlog/app/service/post.GetPosts   | middleware.CORS  
+|---------|---------|---------|--------|-----------------------|-----------------------------------------|-----------------|
+  default | default | :8199   | POST   | /ava-api/image/delete | NatsunaBlog/app/api/image.DeleteImage   | middleware.CORS  
+|---------|---------|---------|--------|-----------------------|-----------------------------------------|-----------------|
+  default | default | :8199   | POST   | /ava-api/image/upload | NatsunaBlog/app/api/image.UploadImage   | middleware.CORS  
+|---------|---------|---------|--------|-----------------------|-----------------------------------------|-----------------|
+  default | default | :8199   | GET    | /ava-api/logout       | NatsunaBlog/app/api/check.LogOut        | middleware.CORS  
+|---------|---------|---------|--------|-----------------------|-----------------------------------------|-----------------|
+  default | default | :8199   | POST   | /ava-api/post/delete  | NatsunaBlog/app/service/post.DeletePost | middleware.CORS  
+|---------|---------|---------|--------|-----------------------|-----------------------------------------|-----------------|
+  default | default | :8199   | GET    | /ava-api/post/get-one | NatsunaBlog/app/service/post.GetOnePost | middleware.CORS  
+|---------|---------|---------|--------|-----------------------|-----------------------------------------|-----------------|
+  default | default | :8199   | POST   | /ava-api/post/update  | NatsunaBlog/app/service/post.UpdatePost | middleware.CORS  
+|---------|---------|---------|--------|-----------------------|-----------------------------------------|-----------------|
+
+2021-04-06 14:02:42.986 90516: all servers shutdown
+2021-04-06 14:37:38.556 [DEBU] SetServerRoot path: /home/prcups/Projects/NatsunaBlog/public
+2021-04-06 14:37:38.557 94761: http server started listening on [:8199]
+
+  SERVER  | DOMAIN  | ADDRESS | METHOD |         ROUTE         |                 HANDLER                 |   MIDDLEWARE     
+|---------|---------|---------|--------|-----------------------|-----------------------------------------|-----------------|
+  default | default | :8199   | POST   | /ava-api/check        | NatsunaBlog/app/api/check.Check         | middleware.CORS  
+|---------|---------|---------|--------|-----------------------|-----------------------------------------|-----------------|
+  default | default | :8199   | GET    | /ava-api/get-page-num | NatsunaBlog/app/service/post.GetPageNum | middleware.CORS  
+|---------|---------|---------|--------|-----------------------|-----------------------------------------|-----------------|
+  default | default | :8199   | GET    | /ava-api/get-posts    | NatsunaBlog/app/service/post.GetPosts   | middleware.CORS  
+|---------|---------|---------|--------|-----------------------|-----------------------------------------|-----------------|
+  default | default | :8199   | POST   | /ava-api/image/delete | NatsunaBlog/app/api/image.DeleteImage   | middleware.CORS  
+|---------|---------|---------|--------|-----------------------|-----------------------------------------|-----------------|
+  default | default | :8199   | POST   | /ava-api/image/upload | NatsunaBlog/app/api/image.UploadImage   | middleware.CORS  
+|---------|---------|---------|--------|-----------------------|-----------------------------------------|-----------------|
+  default | default | :8199   | GET    | /ava-api/logout       | NatsunaBlog/app/api/check.LogOut        | middleware.CORS  
+|---------|---------|---------|--------|-----------------------|-----------------------------------------|-----------------|
+  default | default | :8199   | POST   | /ava-api/post/delete  | NatsunaBlog/app/service/post.DeletePost | middleware.CORS  
+|---------|---------|---------|--------|-----------------------|-----------------------------------------|-----------------|
+  default | default | :8199   | GET    | /ava-api/post/get-one | NatsunaBlog/app/service/post.GetOnePost | middleware.CORS  
+|---------|---------|---------|--------|-----------------------|-----------------------------------------|-----------------|
+  default | default | :8199   | POST   | /ava-api/post/update  | NatsunaBlog/app/service/post.UpdatePost | middleware.CORS  
+|---------|---------|---------|--------|-----------------------|-----------------------------------------|-----------------|
+
+2021-04-06 14:43:37.925 94761: all servers shutdown

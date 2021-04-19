@@ -1,0 +1,13 @@
+[server]
+	Address = ":8199"
+	LogPath = "./log/server"
+	LogStdout = false
+	ErrorStack = true
+	ErrorLogEnabled = true
+	ErrorLogPattern = "error.{Ymd}.log"
+	AccessLogEnabled = true
+	AccessLogPattern = "access.{Ymd}.log"
+
+[database]
+	[[database.default]]
+		link = "sqlite:./config/db_blog.db"

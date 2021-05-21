@@ -28,11 +28,6 @@ type DBBLOGCONFIGDao struct {
 type dBBLOGCONFIGColumns struct {
 	Username string //
 	Password string //
-	Title    string //
-	Desp     string //
-	Tag      string //
-	Url      string //
-	Picurl   string //
 }
 
 var (
@@ -44,11 +39,6 @@ var (
 		Columns: dBBLOGCONFIGColumns{
 			Username: "username",
 			Password: "password",
-			Title:    "title",
-			Desp:     "desp",
-			Tag:      "tag",
-			Url:      "url",
-			Picurl:   "picurl",
 		},
 	}
 )

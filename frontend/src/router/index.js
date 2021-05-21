@@ -9,13 +9,13 @@ import Manage from "../views/admin/manage"
 import Check from "../views/admin/check"
 import PageNotFound from "../views/index/page-not-found"
 import Classify from "../views/index/classify"
-import Timeline from "../views/index/timeline"
-
+import TimeLine from "../views/index/timeline"
 
 Vue.use(VueRouter)
 
 export default new VueRouter({
-  mode: 'history',
+	mode: 'history',
+	base: process.env.BASE_URL,
 	routes: [
 		{
 			path: '/',
@@ -35,6 +35,16 @@ export default new VueRouter({
 					path: 'page-not-found',
 					name: 'PageNotFound',
 					component: PageNotFound
+				},
+				{
+					path: 'classify',
+					name: 'Classify',
+					component: Classify
+				},
+				{
+					path: 'timeline',
+					name: 'TimeLine',
+					component: TimeLine
 				}
 			]
 		},

@@ -1,10 +1,10 @@
 import axios from "axios"
-import url from "./url"
+import global from "../../../global";
 
 function setIfChecked(t) {
     axios({
         method: "post",
-        url: url.CheckUrl
+        url: global.CheckUrl
     })
         .then(res => {
             if (t.user !== undefined) t.user = res.data.user
@@ -15,7 +15,7 @@ function setIfChecked(t) {
 function logout(t) {
     axios({
         method: "get",
-        url: url.LogOutUrl
+        url: global.LogOutUrl
     })
         .then(res => {
             t.$router.go(0)

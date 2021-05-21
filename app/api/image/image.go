@@ -10,7 +10,7 @@ type UploadImageRes struct{
 	Name string `json:"name"`
 }
 
-var imageSaveUrl string = "static/upload_images"
+var imageSaveUrl = "static/upload_images"
 
 func UploadImage(r *ghttp.Request) {
 	if r.Session.GetString("user") == "" {

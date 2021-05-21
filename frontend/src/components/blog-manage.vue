@@ -1,5 +1,5 @@
 <template>
-    <b-col cols="4">
+    <b-col cols="4" style="min-width: 300px; margin-left: auto; margin-right: auto">
         <b-card :title="title">
             <b-card-text>
                 {{ time }}
@@ -12,7 +12,6 @@
 
 <script>
     import axios from "axios"
-    import url from "../assets/javascript/url"
 
     export default {
         name: "blog-manage",
@@ -21,7 +20,7 @@
             deletePost() {
                 axios({
                     method: "post",
-                    url: url.DeletePostUrl,
+                    url: this.configVal.DeletePostUrl,
                     data: {
                         id: this.id
                     }
@@ -33,7 +32,7 @@
         },
         computed:{
             editUrl: function () {
-                return "/#/admin/modify/" + this.id
+                return "/admin/modify/" + this.id
             }
         }
     }

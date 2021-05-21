@@ -21,7 +21,6 @@ natsunaBlog 0.2.0
 - 使用新的独立页面逻辑
 - 大小标签管理
 - 站内搜索
-- Markdown评论
 
 natsunaBlog 0.1.2 (AvaBlog)
 

@@ -6,11 +6,12 @@ import (
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/net/ghttp"
 	"github.com/gogf/gf/os/gtime"
+	_ "github.com/mattn/go-sqlite3"
 	"math"
 )
 
 const (
-	PostsInOnePage int = 5
+	PostsInOnePage int = 6
 )
 
 //博客简要信息

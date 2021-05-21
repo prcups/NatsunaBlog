@@ -8,9 +8,4 @@ package internal
 type DBBLOGCONFIG struct {
 	Username string `orm:"username" json:"username"` //
 	Password string `orm:"password" json:"password"` //
-	Title    string `orm:"title"    json:"title"`    //
-	Desp     string `orm:"desp"     json:"desp"`     //
-	Tag      string `orm:"tag"      json:"tag"`      //
-	Url      string `orm:"url"      json:"url"`      //
-	Picurl   string `orm:"picurl"   json:"picurl"`   //
 }

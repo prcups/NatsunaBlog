@@ -1,5 +1,5 @@
 <template>
-    <b-col cols="12">
+    <b-col cols="4" style="min-width: 300px; margin-left: auto; margin-right: auto">
         <b-card :title="title">
             <b-card-text>
                 {{ time }}

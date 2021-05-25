@@ -5,7 +5,6 @@ import (
 	"NatsunaBlog/app/service/post"
 	"github.com/gogf/gf/net/ghttp"
 	"github.com/gogf/gf/os/gtime"
-	"math"
 )
 
 type GetPostsElement struct {
@@ -34,14 +33,4 @@ func GetPostOfClassify(r *ghttp.Request) {
 	dao.DBBLOGPOST.Order("ontop desc, id desc").Limit((page-1)*post.PostsInOnePage, post.PostsInOnePage).
 		Scan(&posts, "classify = ?", classify)
 	r.Response.WriteJsonExit(posts)
-}
-
-//获取分页总页数
-func GetClassifyPageNum(r *ghttp.Request) {
-	classify := r.GetString("classify")
-	postNum, err := dao.DBBLOGPOST.Where("classify = ?", classify).Count()
-	if err != nil{
-		r.Response.WritelnExit("GET PAGENUM: " + err.Error())
-	}
-	r.Response.WritelnExit(math.Ceil(float64(postNum) / float64(post.PostsInOnePage)))
 }

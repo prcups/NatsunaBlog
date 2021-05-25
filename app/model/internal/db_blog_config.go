@@ -6,6 +6,6 @@ package internal
 
 // DBBLOGCONFIG is the golang structure for table DB_BLOG_CONFIG.
 type DBBLOGCONFIG struct {
-	Username string `orm:"username" json:"username"` //
-	Password string `orm:"password" json:"password"` //
+	USERNAME string `orm:"USERNAME" json:"username"` //
+	PASSWORD string `orm:"PASSWORD" json:"password"` //
 }

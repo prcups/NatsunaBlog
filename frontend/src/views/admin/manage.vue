@@ -46,7 +46,8 @@ export default {
       method: 'get',
       url: this.configVal.GetPostsUrl,
       params: {
-        page: this.curPage()
+        page: this.curPage(),
+        isAll: true
       }
     })
         .then(res => {

@@ -26,18 +26,17 @@ type DBBLOGPOSTDao struct {
 
 // DBBLOGPOSTColumns defines and stores column names for table DB_BLOG_POST.
 type dBBLOGPOSTColumns struct {
-	Id         string //
-	Title      string //
-	Timeline   string //
-	Time       string //
-	Author     string //
-	Hided      string //
-	Content    string //
-	Classify   string //
-	Tag        string //
-	VisitTimes string //
-	Ontop      string //
-	Like       string //
+	ID         string //
+	TITLE      string //
+	TIMELINE   string //
+	TIME       string //
+	AUTHOR     string //
+	HID        string //
+	CONTENT    string //
+	CLASSIFY   string //
+	TAG        string //
+	VISITTIMES string //
+	ONTOP      string //
 }
 
 var (
@@ -47,18 +46,17 @@ var (
 		DB:    g.DB("default"),
 		Table: "DB_BLOG_POST",
 		Columns: dBBLOGPOSTColumns{
-			Id:         "id",
-			Title:      "title",
-			Timeline:   "timeline",
-			Time:       "time",
-			Author:     "author",
-			Hided:      "hided",
-			Content:    "content",
-			Classify:   "classify",
-			Tag:        "tag",
-			VisitTimes: "visit_times",
-			Ontop:      "ontop",
-			Like:       "like",
+			ID:         "ID",
+			TITLE:      "TITLE",
+			TIMELINE:   "TIMELINE",
+			TIME:       "TIME",
+			AUTHOR:     "AUTHOR",
+			HID:        "HID",
+			CONTENT:    "CONTENT",
+			CLASSIFY:   "CLASSIFY",
+			TAG:        "TAG",
+			VISITTIMES: "VISIT_TIMES",
+			ONTOP:      "ONTOP",
 		},
 	}
 )

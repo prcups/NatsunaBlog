@@ -26,8 +26,8 @@ type DBBLOGCONFIGDao struct {
 
 // DBBLOGCONFIGColumns defines and stores column names for table DB_BLOG_CONFIG.
 type dBBLOGCONFIGColumns struct {
-	Username string //
-	Password string //
+	USERNAME string //
+	PASSWORD string //
 }
 
 var (
@@ -37,8 +37,8 @@ var (
 		DB:    g.DB("default"),
 		Table: "DB_BLOG_CONFIG",
 		Columns: dBBLOGCONFIGColumns{
-			Username: "username",
-			Password: "password",
+			USERNAME: "USERNAME",
+			PASSWORD: "PASSWORD",
 		},
 	}
 )

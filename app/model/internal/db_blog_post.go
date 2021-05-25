@@ -4,22 +4,17 @@
 
 package internal
 
-import (
-	"github.com/gogf/gf/os/gtime"
-)
-
 // DBBLOGPOST is the golang structure for table DB_BLOG_POST.
 type DBBLOGPOST struct {
-	Id         int         `orm:"id"          json:"id"`         //
-	Title      string      `orm:"title"       json:"title"`      //
-	Timeline   *gtime.Time `orm:"timeline"    json:"timeline"`   //
-	Time       *gtime.Time `orm:"time"        json:"time"`       //
-	Author     string      `orm:"author"      json:"author"`     //
-	Hided      bool        `orm:"hided"       json:"hided"`      //
-	Content    string      `orm:"content"     json:"content"`    //
-	Classify   string      `orm:"classify"    json:"classify"`   //
-	Tag        string      `orm:"tag"         json:"tag"`        //
-	VisitTimes int         `orm:"visit_times" json:"visitTimes"` //
-	Ontop      bool        `orm:"ontop"       json:"ontop"`      //
-	Like       int         `orm:"like"        json:"like"`       //
+	ID         int    `orm:"ID,primary"  json:"id"`          //
+	TITLE      string `orm:"TITLE"       json:"title"`       //
+	TIMELINE   string `orm:"TIMELINE"    json:"timeline"`    //
+	TIME       string `orm:"TIME"        json:"time"`        //
+	AUTHOR     string `orm:"AUTHOR"      json:"author"`      //
+	HID        int    `orm:"HID"         json:"hid"`         //
+	CONTENT    string `orm:"CONTENT"     json:"content"`     //
+	CLASSIFY   string `orm:"CLASSIFY"    json:"classify"`    //
+	TAG        string `orm:"TAG"         json:"tag"`         //
+	VISITTIMES int    `orm:"VISIT_TIMES" json:"visit_times"` //
+	ONTOP      int    `orm:"ONTOP"       json:"ontop"`       //
 }

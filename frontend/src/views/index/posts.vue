@@ -52,11 +52,12 @@ export default {
       method: 'get',
       url: this.configVal.GetPostsUrl,
       params: {
-        page: this.curPage()
+        page: this.curPage(),
+        isAll: false
       }
     })
         .then(res => {
-          this.posts = res.data
+          if (res.data) this.posts = res.data
         })
   },
   watch: {

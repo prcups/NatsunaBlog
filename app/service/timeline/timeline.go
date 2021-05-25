@@ -5,7 +5,6 @@ import (
 	"NatsunaBlog/app/service/post"
 	"github.com/gogf/gf/net/ghttp"
 	"github.com/gogf/gf/os/gtime"
-	"math"
 )
 
 type GetPostsElement struct {
@@ -34,13 +33,4 @@ func GetPostOfTimeLine(r *ghttp.Request) {
 	dao.DBBLOGPOST.Order("ontop desc, id desc").Limit((page-1)*post.PostsInOnePage, post.PostsInOnePage).
 		Scan(&posts, "timeline = ?", timeline)
 	r.Response.WriteJsonExit(posts)
-}
-
-func GetTimeLinePageNum(r *ghttp.Request) {
-	timeline := r.GetString("timeline")
-	postNum, err := dao.DBBLOGPOST.Where("timeline = ?", timeline).Count()
-	if err != nil{
-		r.Response.WritelnExit("GET PAGENUM: " + err.Error())
-	}
-	r.Response.WritelnExit(math.Ceil(float64(postNum) / float64(post.PostsInOnePage)))
 }

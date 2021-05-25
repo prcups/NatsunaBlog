@@ -6,7 +6,6 @@ import (
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/net/ghttp"
 	"github.com/gogf/gf/os/gtime"
-	_ "github.com/mattn/go-sqlite3"
 	"math"
 )
 
@@ -24,25 +23,6 @@ type GetPostsElement struct {
 	Classify string `json:"classify"`
 }
 
-//博客完整信息
-/*type PostType struct {
-	Time gtime.Time	`json:"time" orm:"time"`
-	Title string	`json:"title" orm:"title"`
-	Content string	`json:"content" orm:"content"`
-	VisitTimes int	`json:"visit_times" orm:"visit_times"`
-	Author string	`json:"author" orm:"author"`
-	Hided bool `json:"hided" orm:"hided"`
-	OnTop bool `json:"ontop" orm:"ontop"`
-	Tag string `json:"tag" orm:"tag"`
-	Classify string `json:"classify" orm:"classify"`
-	Like string `json:"like" orm:"like"`
-}*/
-
-/*//博客列表
-type GetPostsRes struct{
-	Posts []GetPostsElement `json:"posts"`
-}*/
-
 //获取总页数
 func GetPageNum(r *ghttp.Request) {
 	postNum, err := dao.DBBLOGPOST.Count()
@@ -54,16 +34,16 @@ func GetPageNum(r *ghttp.Request) {
 
 //获取单页博客所有内容
 func GetOnePost(r *ghttp.Request) {
-	postID := r.Get("id")
+	postID := r.GetInt("id")
 	post, err := dao.DBBLOGPOST.One("id = ?", postID)
 	if err != nil {
 		r.Response.WritelnExit("GET ONE POST: " + err.Error())
 	}
 	if post == nil {
-		r.Response.WritelnExit()
+		r.Response.WriteExit()
 	}
 	if r.GetBool("visitOnly") {
-		dao.DBBLOGPOST.Update(g.Map{"visit_times": post.VisitTimes + 1}, "id", postID)
+		dao.DBBLOGPOST.Update(g.Map{"visit_times": post.VISITTIMES + 1}, "id", postID)
 	}
 	r.Response.WriteJsonExit(post)
 }
@@ -71,8 +51,21 @@ func GetOnePost(r *ghttp.Request) {
 //获取当前页博客列表
 func GetPosts(r *ghttp.Request) {
 	page := r.GetInt("page")
+	isAll := r.GetBool("isAll")
 	var getCurPosts []*GetPostsElement
-	err := dao.DBBLOGPOST.Order("ontop desc, id desc").Limit((page-1)*PostsInOnePage, PostsInOnePage).Scan(&getCurPosts)
+	var err error
+	if (isAll) {
+		err = dao.DBBLOGPOST.
+			Order("id desc").
+			Limit((page-1)*PostsInOnePage, PostsInOnePage).
+			Scan(&getCurPosts)
+	} else {
+		err = dao.DBBLOGPOST.
+			Where("hid = ?", 0).
+			Order("ontop desc, id desc").
+			Limit((page-1)*PostsInOnePage, PostsInOnePage).
+			Scan(&getCurPosts)
+	}
 	if err != nil {
 		r.Response.WritelnExit("GET POSTS: " + err.Error())
 	}
@@ -110,7 +103,7 @@ func UpdatePost(r *ghttp.Request) {
 			"content": r.GetString("content"),
 			"author": r.Session.GetString("user"),
 			"visit_times": 0,
-			"hided": r.GetString("hided"),
+			"hid": r.GetString("hid"),
 			"ontop": r.GetString("ontop"),
 			"tag": r.GetString("tag"),
 			"classify": r.GetString("classify"),
@@ -124,7 +117,7 @@ func UpdatePost(r *ghttp.Request) {
 			"title": title,
 			"content": r.GetString("content"),
 			"author": r.Session.GetString("user"),
-			"hided": r.GetString("hided"),
+			"hid": r.GetString("hid"),
 			"ontop": r.GetString("ontop"),
 			"tag": r.GetString("tag"),
 			"classify": r.GetString("classify"),

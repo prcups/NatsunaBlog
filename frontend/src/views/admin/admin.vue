@@ -15,7 +15,7 @@
         <b-button size="sm" @click="buttonAct" class="my-2 my-sm-0">{{ buttonWord }}</b-button>
       </b-navbar-nav>
     </b-navbar>
-    <b-nav-text v-if="$router.currentRoute.path == '/admin'">
+    <b-nav-text v-if="$router.currentRoute.path == '/admin'" style="margin-top: 20vh">
       欢迎来到NatsunaBlog控制台！<br>
       请先点击右上角登录。<br>
       选择“管理“可编辑或删除您写过的文章。”新建“会创建新文章。<br>

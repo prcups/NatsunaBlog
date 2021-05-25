@@ -2,14 +2,13 @@
   <b-row @submit.stop.prevent>
     <b-col cols="3" offset="4">
       <br>
-      <h3 style="text-align: center">登录</h3>
-      <br>
-      <b-input placeholder="用户名" v-model="username"></b-input>
-      <b-input type="password" placeholder="密码" v-model="password"></b-input>
-      <br>
-      <b-button variant="primary" style="align-self: center" @click="PostPassword">登录</b-button>
-      <br>
-      <b-nav-text>{{ alert }}</b-nav-text>
+      <b-form style="margin-top: 20vh">
+        <label style="text-align: center">登录</label>
+        <b-form-input placeholder="用户名" v-model="username"></b-form-input>
+        <b-form-input type="password" placeholder="密码" v-model="password"></b-form-input>
+        <b-button variant="primary" style="align-self: center; margin-top: 1vh;" @click="PostPassword">登录</b-button>
+        <b-form-text style="margin-top: 1vh">{{ alert }}</b-form-text>
+      </b-form>
     </b-col>
   </b-row>
 </template>

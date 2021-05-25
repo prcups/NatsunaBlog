@@ -8,6 +8,7 @@
       <b-navbar type="light" variant="light">
         <b-navbar-nav>
           <b-nav-item exact exact-active-class="active" href="/">主页</b-nav-item>
+          <b-nav-item exact v-for="item in this.configVal.OnNav" :href="item.url" :key="item.title">{{item.title}}</b-nav-item>
         </b-navbar-nav>
       </b-navbar>
     </header>

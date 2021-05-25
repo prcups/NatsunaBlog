@@ -9,5 +9,15 @@
 	AccessLogPattern = "access.{Ymd}.log"
 
 [database]
-	[[database.default]]
-		link = "sqlite:./config/db_blog.db"
+	[database.logger]
+		path   = "./log/sql"
+		level  = "all"
+		stdout = true
+	[database.default]
+		link = "mysql:root:VanillA5Caa@tcp(127.0.0.1:3306)/DB_BLOG"
+		debug = true
+
+[gfcli]
+	[[gfcli.gen.dao]]
+		link = "mysql:root:VanillA5Caa@tcp(127.0.0.1:3306)/DB_BLOG"
+		jsonCase = "Snake"

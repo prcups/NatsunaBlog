@@ -3,7 +3,7 @@
     <header class="header">
       <br>
       <h1>{{ post.title }}</h1>
-      <h6>由 {{ post.author }} 于 {{ post.time }} 所写，被访问 {{ post.visitTimes }} 次</h6>
+      <h6>由 {{ post.author }} 于 {{ post.time }} 所写，被访问 {{ post.visit_times }} 次</h6>
       <hr>
     </header>
     <mavon-editor :value="post.content"
@@ -33,7 +33,7 @@ export default {
         title: "",
         time: "",
         content: "",
-        visitTimes: "",
+        visit_times: "",
         author: ""
       }
     }
@@ -48,7 +48,6 @@ export default {
       }
     })
         .then(res => {
-          console.log(res.data)
           if (res.data == "") {
             this.$router.push("/page-not-found")
           }

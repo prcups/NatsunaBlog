@@ -3,6 +3,7 @@
     <header class="header">
       <br>
       <h1>{{ post.title }}</h1>
+      <h6>分类：{{post.classify}} | 标签：{{post.tag != "" ? post.tag : "无"}}</h6>
       <h6>由 {{ post.author }} 于 {{ post.time }} 所写，被访问 {{ post.visit_times }} 次</h6>
       <hr>
     </header>
@@ -34,7 +35,9 @@ export default {
         time: "",
         content: "",
         visit_times: "",
-        author: ""
+        author: "",
+        classify: "",
+        tag: ""
       }
     }
   },

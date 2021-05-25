@@ -25,7 +25,16 @@ type GetPostsElement struct {
 
 //获取总页数
 func GetPageNum(r *ghttp.Request) {
-	postNum, err := dao.DBBLOGPOST.Count()
+	isAll := r.GetBool("isAll")
+	var postNum int
+	var err error
+	if isAll {
+		postNum, err = dao.DBBLOGPOST.
+			Where("hid = ?", 0).
+			Count()
+	} else {
+		postNum, err = dao.DBBLOGPOST.Count()
+	}
 	if err != nil{
 		r.Response.WritelnExit("GET PAGENUM: " + err.Error())
 	}
@@ -103,8 +112,8 @@ func UpdatePost(r *ghttp.Request) {
 			"content": r.GetString("content"),
 			"author": r.Session.GetString("user"),
 			"visit_times": 0,
-			"hid": r.GetString("hid"),
-			"ontop": r.GetString("ontop"),
+			"hid": r.GetInt("hid"),
+			"ontop": r.GetInt("ontop"),
 			"tag": r.GetString("tag"),
 			"classify": r.GetString("classify"),
 		})
@@ -117,8 +126,8 @@ func UpdatePost(r *ghttp.Request) {
 			"title": title,
 			"content": r.GetString("content"),
 			"author": r.Session.GetString("user"),
-			"hid": r.GetString("hid"),
-			"ontop": r.GetString("ontop"),
+			"hid": r.GetInt("hid"),
+			"ontop": r.GetInt("ontop"),
 			"tag": r.GetString("tag"),
 			"classify": r.GetString("classify"),
 		}, "id", postID)

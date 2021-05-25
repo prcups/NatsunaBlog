@@ -38,9 +38,12 @@ export default {
     axios({
       method: 'get',
       url: this.configVal.GetPageNumUrl,
+      param: {
+        isAll: true
+      }
     })
         .then(res => {
-          this.pages = res.data.pages != 0 ? res.data.pages : 1
+          this.pages = res.data != 0 ? res.data : 1
         })
     axios({
       method: 'get',

@@ -2,7 +2,7 @@
   <b-container>
     <div v-if="this.posts.length == 0" style="height: 56vh">
       <br>
-      <p align="center">你还未发表过文章哦！</p>
+      <p align="center">你还未发表过文章呢！</p>
     </div>
     <div v-else style="min-height: 56vh">
       <b-row>
@@ -44,9 +44,12 @@ export default {
     axios({
       method: 'get',
       url: this.configVal.GetPageNumUrl,
+      param: {
+        isAll: false
+      }
     })
         .then(res => {
-          this.pages = res.data.pages != 0 ? res.data.pages : 1
+          this.pages = res.data != 0 ? res.data : 1
         })
     axios({
       method: 'get',

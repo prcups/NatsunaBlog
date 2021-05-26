@@ -14,6 +14,7 @@ export default {
     Description: description,
     Tag: tag,
     OnNav: onNav,
+
     GetPageNumUrl: baseUrl + "/ava-api/get-page-num",
     GetPostsUrl: baseUrl + "/ava-api/get-posts",
     GetOnePostUrl: baseUrl + "/ava-api/post/get-one",
@@ -23,5 +24,9 @@ export default {
     DeleteImageUrl: baseUrl + "/ava-api/image/delete",
     UpdatePostUrl: baseUrl + "/ava-api/post/update",
     DeletePostUrl: baseUrl + "/ava-api/post/delete",
-    GetImageBaseUrl: baseUrl + "/static/upload_images"
+    GetImageBaseUrl: baseUrl + "/static/upload_images",
+    GetPostsOfClassify: baseUrl + "/ava-api/get-classify/get-posts",
+    GetAllClassify: baseUrl + "/ava-api/get-classify/get-all",
+    GetPostsOfTimeline: baseUrl + "/ava-api/get-timeline/get-posts",
+    GetAllTimeline: baseUrl + "/ava-api/get-timeline/get-all"
 }

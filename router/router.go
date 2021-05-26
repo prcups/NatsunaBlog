@@ -30,11 +30,11 @@ func init() {
 		})
 		group.Group("/get-classify", func(group *ghttp.RouterGroup){
 			group.GET("/get-all", classify.GetAllClassify)
-			group.GET("/get-post", classify.GetPostOfClassify)
+			group.GET("/get-posts", classify.GetPostsOfClassify)
 		})
 		group.Group("/get-timeline", func(group *ghttp.RouterGroup){
 			group.GET("/get-all", timeline.GetAllTimeLine)
-			group.GET("/get-post", timeline.GetPostOfTimeLine)
+			group.GET("/get-posts", timeline.GetPostsOfTimeLine)
 		})
 		group.POST("/check", check.Check)
 		group.GET("/logout", check.LogOut)

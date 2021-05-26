@@ -2,14 +2,12 @@ package timeline
 
 import (
 	"NatsunaBlog/app/dao"
-	"NatsunaBlog/app/service/post"
 	"github.com/gogf/gf/net/ghttp"
-	"github.com/gogf/gf/os/gtime"
 )
 
 type GetPostsElement struct {
 	Id int			`json:"id"`
-	Time gtime.Time	`json:"time"`
+	Time string	`json:"time"`
 	Title string	`json:"title"`
 	OnTop bool `json:"ontop"`
 	Tag string `json:"tag"`
@@ -18,7 +16,7 @@ type GetPostsElement struct {
 
 //获取所有归档
 func GetAllTimeLine(r *ghttp.Request) {
-	timeline, err := dao.DBBLOGPOST.FindArray("timeline")
+	timeline, err := dao.DBBLOGPOST.FindArray("distinct timeline")
 	if err != nil {
 		r.Response.WritelnExit("GETALLTIMELINE: " + err.Error())
 	}
@@ -26,11 +24,10 @@ func GetAllTimeLine(r *ghttp.Request) {
 }
 
 //获取单个归档下的内容
-func GetPostOfTimeLine(r *ghttp.Request) {
+func GetPostsOfTimeLine(r *ghttp.Request) {
 	timeline := r.GetString("timeline")
-	page := r.GetInt("page")
-	var posts GetPostsElement
-	dao.DBBLOGPOST.Order("ontop desc, id desc").Limit((page-1)*post.PostsInOnePage, post.PostsInOnePage).
+	var posts []GetPostsElement
+	dao.DBBLOGPOST.Order("id desc").
 		Scan(&posts, "timeline = ?", timeline)
 	r.Response.WriteJsonExit(posts)
 }

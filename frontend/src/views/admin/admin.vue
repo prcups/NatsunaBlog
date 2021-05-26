@@ -1,5 +1,5 @@
 <template>
-  <b-container align="center">
+  <b-container style="text-align: center;">
     <b-navbar type="dark" variant="info">
       <b-navbar-brand href="/admin">NatsunaBlog控制台</b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>

@@ -30,15 +30,7 @@ export default {
   },
   data() {
     return {
-      post: {
-        title: "",
-        time: "",
-        content: "",
-        visit_times: "",
-        author: "",
-        classify: "",
-        tag: ""
-      }
+      post: {}
     }
   },
   created() {

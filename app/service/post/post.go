@@ -5,7 +5,6 @@ import (
 	"database/sql"
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/net/ghttp"
-	"github.com/gogf/gf/os/gtime"
 	"math"
 )
 
@@ -16,7 +15,7 @@ const (
 //博客简要信息
 type GetPostsElement struct {
 	Id int			`json:"id"`
-	Time gtime.Time	`json:"time"`
+	Time string	`json:"time"`
 	Title string	`json:"title"`
 	OnTop bool `json:"ontop"`
 	Tag string `json:"tag"`

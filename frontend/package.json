@@ -19,6 +19,7 @@
     "mavon-editor": "^2.9.0",
     "vue": "^2.6.11",
     "vue-axios": "^2.1.5",
+    "vue-meta": "^2.4.0",
     "vue-router": "^3.3.4"
   },
   "devDependencies": {

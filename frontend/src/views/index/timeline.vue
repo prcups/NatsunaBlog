@@ -15,6 +15,11 @@ export default {
       allTimeline: []
     }
   },
+  metaInfo() {
+    return {
+      title: "归档" + " - " + this.configVal.Title
+    }
+  },
   components: {
     'timeline-comp': timelineComp
   },

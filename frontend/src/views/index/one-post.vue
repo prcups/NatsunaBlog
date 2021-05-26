@@ -30,7 +30,29 @@ export default {
   },
   data() {
     return {
-      post: {}
+      post: {
+        content: ""
+      }
+    }
+  },
+  computed: {
+    desp: function() {
+      return this.post.content.substr(0, 20)
+    }
+  },
+  metaInfo() {
+    return {
+      title: this.post.title + " - " + this.configVal.Title,
+      meta:[
+        {
+          name: "keywords",
+          content:this.post.tag
+        },
+        {
+          name:"description",
+          content:this.desp
+        }
+      ]
     }
   },
   created() {

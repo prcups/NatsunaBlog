@@ -20,7 +20,6 @@ import BlogPost from "../../components/blog-post"
 import axios from 'axios'
 
 export default {
-  name: "index-posts",
   components: {
     'blog-post': BlogPost
   },
@@ -39,8 +38,22 @@ export default {
       return queryPage ? queryPage : 1
     }
   },
+  metaInfo() {
+    return {
+      title: this.configVal.Title,
+      meta:[
+        {
+          name:'keywords',
+          content:this.configVal.Tag
+        },
+        {
+          name:"description",
+          content:this.configVal.Description
+        }
+      ]
+    }
+  },
   created() {
-    document.title = this.configVal.Title
     axios({
       method: 'get',
       url: this.configVal.GetPageNumUrl,

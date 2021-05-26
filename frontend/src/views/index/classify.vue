@@ -15,6 +15,11 @@ export default {
       allClassify: []
     }
   },
+  metaInfo() {
+    return {
+      title: "分类" + " - " + this.configVal.Title
+    }
+  },
   components: {
     'classify-comp': classifyComp
   },

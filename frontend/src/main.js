@@ -7,6 +7,7 @@ import VueAxios from 'vue-axios'
 import mavonEditor from 'mavon-editor'
 import md5 from 'js-md5'
 import Global from "../global";
+import Meta from 'vue-meta'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -15,6 +16,7 @@ import 'mavon-editor/dist/css/index.css'
 Vue.use(BootstrapVue)
 Vue.use(VueAxios, Axios)
 Vue.use(mavonEditor)
+Vue.use(Meta)
 
 Vue.config.productionTip = false
 Vue.prototype.$md5 = md5

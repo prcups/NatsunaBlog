@@ -1,11 +1,15 @@
-var baseUrl = "http://127.0.0.1:8199"
+var baseUrl = "http://v-signal.xyz"
 var title = "Yuno"
 var description = "再年轻一次吧"
 var tag = "博客,龙芯,C++,Go,Rust"
 var onNav = [
     {
         "title": "关于",
-        "url": "https://mirror.lzu.edu.cn"
+        "url": "http://v-signal.xyz/post/1"
+    },
+    {
+        "title": "札记",
+        "url": "http://v-signal.xyz/post/2"
     }
 ]
 

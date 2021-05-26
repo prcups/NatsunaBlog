@@ -16,22 +16,27 @@
                   :ishljs="true"
                   :boxShadow="false"
     ></mavon-editor>
+    <comment :post-id="this.$md5(this.post.id + this.post.title + this.post.content)"></comment>
   </b-container>
 </template>
 
 <script>
 import axios from 'axios'
 import mavonEditor from 'mavon-editor'
+import comment from '../../components/comment'
 
 export default {
   name: "onepost",
   components: {
-    'mavon-editor': mavonEditor.mavonEditor
+    'mavon-editor': mavonEditor.mavonEditor,
+    'comment': comment
   },
   data() {
     return {
       post: {
-        content: ""
+        content: "",
+        id: "",
+        title: ""
       }
     }
   },

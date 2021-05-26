@@ -62,8 +62,11 @@ export default {
       }
     })
         .then(res => {
-          this.pages = res.data != 0 ? res.data : 1
+          this.pages = res.data > 0 ? res.data : 1
         })
+    if (this.curPage() > this.pages) {
+      this.$router.push("/?page=" + this.pages)
+    }
     axios({
       method: 'get',
       url: this.configVal.GetPostsUrl,

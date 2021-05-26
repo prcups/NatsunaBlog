@@ -60,7 +60,7 @@ export default {
       method: "get",
       url: this.configVal.GetOnePostUrl,
       params: {
-        id: this.$route.params.id,
+        id: parseInt(this.$route.params.id),
         visitOnly: true
       }
     })

@@ -57,7 +57,7 @@ export default {
     axios({
       method: 'get',
       url: this.configVal.GetPageNumUrl,
-      param: {
+      params: {
         isAll: false
       }
     })

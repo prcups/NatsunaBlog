@@ -16,7 +16,7 @@ type GetPostsElement struct {
 
 //获取所有分类
 func GetAllClassify(r *ghttp.Request) {
-	classify, err := dao.DBBLOGPOST.FindArray("distinct classify")
+	classify, err := dao.DBBLOGPOST.Where("hid = ?", 0).FindArray("distinct classify")
 	if err != nil {
 		r.Response.WritelnExit("GETALLCLASSIFY: " + err.Error())
 	}

@@ -1,5 +1,8 @@
 <template>
   <b-container>
+    <div v-loading style="height: 100%; width: 100%; z-index: 100;">
+      <b-spinner variant="primary" label="Spinning"></b-spinner>
+    <div>
     <div v-if="this.posts.length == 0" style="height: 56vh">
       <br>
       <p align="center">你还未发表过文章呢！</p>

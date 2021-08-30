@@ -27,7 +27,7 @@ func GetAllClassify(r *ghttp.Request) {
 func GetPostsOfClassify(r *ghttp.Request) {
 	classify := r.GetString("classify")
 	var posts []GetPostsElement
-	dao.DBBLOGPOST.Order("id desc").
+	dao.DBBLOGPOST.Where("hid = ?", 0).Order("id desc").
 		Scan(&posts, "classify = ?", classify)
 	r.Response.WriteJsonExit(posts)
 }

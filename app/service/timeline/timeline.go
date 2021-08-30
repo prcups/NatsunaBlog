@@ -16,7 +16,7 @@ type GetPostsElement struct {
 
 //获取所有归档
 func GetAllTimeLine(r *ghttp.Request) {
-	timeline, err := dao.DBBLOGPOST.FindArray("distinct timeline")
+	timeline, err := dao.DBBLOGPOST.Where("hid = ?", 0).FindArray("distinct timeline")
 	if err != nil {
 		r.Response.WritelnExit("GETALLTIMELINE: " + err.Error())
 	}

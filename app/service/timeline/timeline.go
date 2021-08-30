@@ -27,7 +27,7 @@ func GetAllTimeLine(r *ghttp.Request) {
 func GetPostsOfTimeLine(r *ghttp.Request) {
 	timeline := r.GetString("timeline")
 	var posts []GetPostsElement
-	dao.DBBLOGPOST.Order("id desc").
+	dao.DBBLOGPOST.Where("hid = ?", 0).Order("id desc").
 		Scan(&posts, "timeline = ?", timeline)
 	r.Response.WriteJsonExit(posts)
 }

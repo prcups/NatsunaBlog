@@ -12,6 +12,7 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "bootstrap-vue": "^2.15.0",
+    "chokidar": "^2.1.8",
     "core-js": "^3.6.5",
     "g": "^2.0.1",
     "jquery": "^3.5.1",

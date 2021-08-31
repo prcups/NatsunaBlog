@@ -1,6 +1,10 @@
 <template>
   <b-container>
-    <div v-if="this.posts.length == 0" style="height: 56vh">
+    <div v-if="loading" align="center" style="height: 56vh;">
+      <b-spinner style="margin-top: 20vh;" variant="primary" label="Spinning"></b-spinner>
+      <p>少女祈祷中</p>
+    </div>
+    <div v-else-if="this.posts.length == 0" style="height: 56vh">
       <br>
       <p align="center">你还未发表过文章呢！</p>
     </div>
@@ -26,7 +30,8 @@ export default {
   data() {
     return {
       posts: [],
-      pages: 1
+      pages: 1,
+      loading: 1
     }
   },
   methods: {
@@ -66,17 +71,18 @@ export default {
           if (this.curPage() > this.pages) {
             this.$router.push("/?page=" + this.pages)
           }
+          axios({
+            method: 'get',
+            url: this.configVal.GetPostsUrl,
+            params: {
+              page: this.curPage(),
+              isAll: false
+            }
         })
-    axios({
-      method: 'get',
-      url: this.configVal.GetPostsUrl,
-      params: {
-        page: this.curPage(),
-        isAll: false
-      }
-    })
-        .then(res => {
-          if (res.data) this.posts = res.data
+          .then(res => {
+            if (res.data) this.posts = res.data
+            this.loading = 0
+          })
         })
   },
   watch: {

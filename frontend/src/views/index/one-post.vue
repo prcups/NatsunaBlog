@@ -1,13 +1,18 @@
 <template>
   <b-container>
-    <header class="header">
-      <br>
-      <h1>{{ post.title }}</h1>
-      <h6>分类：{{post.classify}} | 标签：{{post.tag != "" ? post.tag : "无"}}</h6>
-      <h6>由 {{ post.author }} 于 {{ post.time }} 所写，被访问 {{ post.visit_times }} 次</h6>
-      <hr>
-    </header>
-    <mavon-editor :value="post.content"
+    <div v-if="loading" align="center" style="height: 56vh;">
+      <b-spinner style="margin-top: 20vh;" variant="primary" label="Spinning"></b-spinner>
+      <p>少女祈祷中</p>
+    </div>
+    <div v-else style="min-height: 56vh">
+      <header class="header">
+        <br>
+        <h1>{{ post.title }}</h1>
+        <h6>分类：{{post.classify}} | 标签：{{post.tag != "" ? post.tag : "无"}}</h6>
+        <h6>由 {{ post.author }} 于 {{ post.time }} 所写，被访问 {{ post.visit_times }} 次</h6>
+        <hr>
+      </header>
+      <mavon-editor :value="post.content"
                   :subfield="false"
                   :defaultOpen="'preview'"
                   :toolbarsFlag="false"
@@ -15,8 +20,9 @@
                   :scrollStyle="true"
                   :ishljs="true"
                   :boxShadow="false"
-    ></mavon-editor>
-    <comment :post-id="this.$md5(this.post.id + this.post.title + this.post.content)"></comment>
+      ></mavon-editor>
+      <comment :post-id="this.$md5(this.post.id + this.post.title + this.post.content)"></comment>
+    </div>
   </b-container>
 </template>
 
@@ -34,10 +40,9 @@ export default {
   data() {
     return {
       post: {
-        content: "",
-        id: "",
-        title: ""
-      }
+        title: "加载中"
+      },
+      loading: 1
     }
   },
   computed: {
@@ -74,6 +79,7 @@ export default {
             this.$router.push("/page-not-found")
           }
           this.post = res.data
+          this.loading = 0
         })
   },
   watch: {

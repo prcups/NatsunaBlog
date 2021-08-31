@@ -1,3 +1,6 @@
-.idea
+.idea/
 frontend/node_modules
-log
+log/
+static/
+public/
+config/config.toml

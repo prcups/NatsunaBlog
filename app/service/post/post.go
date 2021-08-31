@@ -27,7 +27,7 @@ func GetPageNum(r *ghttp.Request) {
 	isAll := r.GetBool("isAll")
 	var postNum int
 	var err error
-	if isAll {
+	if !isAll {
 		postNum, err = dao.DBBLOGPOST.
 			Where("hid = ?", 0).
 			Count()
@@ -105,16 +105,29 @@ func UpdatePost(r *ghttp.Request) {
 	if title == "" {
 		title = "未命名"
 	}
+	hid := r.GetInt("hid")
+	if hid != 0 && hid != 1 {
+		hid = 0
+	}
+	ontop := r.GetInt("ontop")
+	if ontop != 0 && ontop != 1 {
+		ontop = 0
+	}
+	classify := r.GetString("classify")
+		if classify == "" {
+		classify = "默认分类"
+	}
+
 	if postID == -1 {
 		result, err = dao.DBBLOGPOST.Insert(g.Map{
 			"title": title,
 			"content": r.GetString("content"),
 			"author": r.Session.GetString("user"),
 			"visit_times": 0,
-			"hid": r.GetInt("hid"),
-			"ontop": r.GetInt("ontop"),
+			"hid": hid,
+			"ontop": ontop,
 			"tag": r.GetString("tag"),
-			"classify": r.GetString("classify"),
+			"classify": classify,
 		})
 		if err != nil{
 			r.Response.WritelnExit("CREATE POSTS: "+ err.Error())
@@ -125,10 +138,10 @@ func UpdatePost(r *ghttp.Request) {
 			"title": title,
 			"content": r.GetString("content"),
 			"author": r.Session.GetString("user"),
-			"hid": r.GetInt("hid"),
-			"ontop": r.GetInt("ontop"),
+			"hid": hid,
+			"ontop": ontop,
 			"tag": r.GetString("tag"),
-			"classify": r.GetString("classify"),
+			"classify": classify,
 		}, "id", postID)
 		if err != nil {
 			r.Response.WritelnExit("UPDATE POSTS: "+ err.Error())

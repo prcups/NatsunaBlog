@@ -1,15 +1,15 @@
-var baseUrl = "http://v-signal.xyz"
+var baseUrl = "https://v-signal.xyz"
 var title = "Yuno"
 var description = "再年轻一次吧"
 var tag = "博客,龙芯,C++,Go,Rust"
 var onNav = [
     {
         "title": "关于",
-        "url": "http://v-signal.xyz/post/1"
+        "url": "https://v-signal.xyz/post/1"
     },
     {
         "title": "札记",
-        "url": "http://v-signal.xyz/post/2"
+        "url": "https://v-signal.xyz/post/7"
     }
 ]
 

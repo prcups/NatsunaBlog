@@ -1,4 +1,4 @@
-# natsunaBlog 0.2.0
+# natsunaBlog 0.2.1
 
 ## 一个简单的个人博客程序
 
@@ -8,12 +8,11 @@
 
 使用插件：主要是MavonEditor
 
-
-## 开发计划
-
-- 提供部署与设置中心
-
 ## 更新日志
+natsunaBlog 0.2.1
+
+- 修复bug
+
 natsunaBlog 0.2.0
 
 - 优化自适应设置

@@ -13,8 +13,6 @@ import (
 
 func init() {
 	s := g.Server()
-	s.AddStaticPath("/", "/public")
-	s.AddStaticPath("/static", "/static")
 	s.Group("/ava-api",func(group *ghttp.RouterGroup){
 		group.Middleware(middleware.CORS)
 		group.GET("/get-posts", post.GetPosts)

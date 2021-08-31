@@ -1,6 +1,6 @@
 {
-  "name": "NatsunaBlog",
-  "version": "0.2.0",
+  "name": "NatsunaBlog-Frontend",
+  "version": "0.2.1",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -8,7 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@vue/cli": "^4.5.12",
+    "@vue/cli": "^4.5.13",
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "bootstrap-vue": "^2.15.0",

@@ -4,3 +4,4 @@ log/
 static/
 public/
 config/config.toml
+blog

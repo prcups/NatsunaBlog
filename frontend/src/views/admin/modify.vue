@@ -14,8 +14,8 @@
         <b-form-input placeholder="分类" v-model="post.classify"></b-form-input>
         <b-form-input placeholder="标签" v-model="post.tag"></b-form-input>
         <b-input-group-append>
-          <b-form-checkbox button v-model="post.ontop" :checked="1" :unchecked-value="0">置顶</b-form-checkbox>
-          <b-form-checkbox button v-model="post.hid" :checked="1" :unchecked-value="0">隐藏</b-form-checkbox>
+          <b-form-checkbox button :checked="post.ontop" value="1" :unchecked-value="0">置顶</b-form-checkbox>
+          <b-form-checkbox button :checked="post.hid" value="1" :unchecked-value="0">隐藏</b-form-checkbox>
         </b-input-group-append>
       </b-input-group>
 

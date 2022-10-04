@@ -1,4 +1,4 @@
-# natsunaBlog 0.2.1
+# NatsunaBlog 0.3.0
 
 ## 一个简单的个人博客程序
 

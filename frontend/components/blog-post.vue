@@ -1,14 +1,14 @@
 <template>
-  <b-col cols="4" style="min-width: 300px; margin-left: auto; margin-right: auto">
-    <b-card :title="(ontop ? '⭐ ' : '') + title">
-      <b-card-text>
+  <div>
+    <div :title="(ontop ? '⭐ ' : '') + title">
+      <div>
         分类：{{ classify }}
         <br>
         {{ time }}
-      </b-card-text>
-      <b-button variant="light" :to="'post/' + id">点击阅读</b-button>
-    </b-card>
-  </b-col>
+      </div>
+      <button onclick="window.location.href='post/'+id">点击阅读</button>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -17,7 +17,3 @@ export default {
   props: ['title', 'time', 'id', 'classify', 'ontop']
 }
 </script>
-
-<style scoped>
-
-</style>

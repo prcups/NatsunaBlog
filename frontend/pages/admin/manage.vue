@@ -4,11 +4,10 @@
       <h3>所有文章</h3>
       <br>
       <div style="min-height: 72vh">
-        <b-row>
+        <div>
           <blog-manage v-for="item in posts" v-bind="item" :key="item.id"></blog-manage>
-        </b-row>
+        </div>
       </div>
-      <b-pagination-nav :link-gen="linkGen" :number-of-pages="pages" align="center" use-router></b-pagination-nav>
     </div>
     <div v-else>
       <p>请先登录</p>
@@ -17,15 +16,10 @@
 </template>
 
 <script>
-import BlogManage from "../../components/blog-manage"
 import {setIfChecked} from "@/assets/javascript/check"
-import axios from "axios"
+import {useFetch} from "nuxt/app"
 
 export default {
-  name: "manage",
-  components: {
-    'blog-manage': BlogManage
-  },
   data() {
     return {
       isChecked: undefined,
@@ -35,30 +29,26 @@ export default {
   },
   created() {
     setIfChecked(this)
-    axios({
+    useFetch(this.$config.GetPageNumUrl, {
       method: 'get',
-      url: this.configVal.GetPageNumUrl,
       params: {
         isAll: true
       }
-    })
-        .then(res => {
-          this.pages = res.data ? res.data : 1
-          if (this.curPage() > this.pages) {
-            this.$router.push("/admin/manage?page=" + this.pages)
-          }
-        })
-    axios({
-      method: 'get',
-      url: this.configVal.GetPostsUrl,
-      params: {
-        page: this.curPage(),
-        isAll: true
+    }).then(res => {
+      this.pages = res.data ? res.data : 1
+      if (this.curPage() > this.pages) {
+        this.$router.push("/admin/manage?page=" + this.pages)
       }
+      return useFetch(this.$config.GetPostUrl, {
+        method: 'get',
+        params: {
+          page: this.curPage(),
+          isAll: true
+        }
+      })
+    }).then(res => {
+      this.posts = res.data
     })
-        .then(res => {
-          this.posts = res.data
-        })
   },
   methods: {
     linkGen(pageNum) {
@@ -76,6 +66,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-</style>

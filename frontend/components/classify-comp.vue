@@ -1,20 +1,23 @@
 <template>
-  <b-card no-body class="mb-1">
-    <b-card-header header-tag="header" class="p-1" role="tab">
-      <b-button block variant="info" @click="show">{{this.classify}}</b-button>
-    </b-card-header>
-    <b-collapse :visible="visiable" @hidden="hidden" accordion="my-accordion" role="tabpanel">
-      <b-card-body>
-        <b-list-group>
-          <b-list-group-item v-for="item in posts" :key="item.id" :href="'/post/' + item.id">{{item.title}}</b-list-group-item>
-        </b-list-group>
-      </b-card-body>
-    </b-collapse>
-  </b-card>
+  <div>
+    <div>
+      <button block variant="info" @click="show">{{ this.classify }}</button>
+    </div>
+    <div>
+      <div>
+        <ul>
+          <li v-for="item in posts" :key="item.id"><a :href="'/post/' + item.id">
+            {{ item.title }}
+          </a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import axios from "axios";
+
+import {useFetch} from "nuxt/app";
 
 export default {
   data() {
@@ -24,26 +27,21 @@ export default {
     }
   },
   props: [
-      'classify'
+    'classify'
   ],
   methods: {
     show() {
       this.visiable = !this.visiable
       if (this.visiable) {
-        axios({
+        useFetch(GetPostsOfClassify, {
           method: "GET",
-          url: this.configVal.GetPostsOfClassify,
           params: {
             classify: this.classify
           }
+        }).then(res => {
+          this.posts = res.data
         })
-            .then(res => {
-              this.posts = res.data
-            })
       }
-    },
-    hidden() {
-      this.visiable = false
     }
   }
 }

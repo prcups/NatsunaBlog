@@ -1,19 +1,18 @@
 <template>
   <div>
-    <div :title="(ontop ? '⭐ ' : '') + title">
+    <div>
+      <NuxtLink :to="'/post/' + id">{{ (ontop ? '⭐ ' : '') + title }}</NuxtLink>
       <div>
         分类：{{ classify }}
         <br>
         {{ time }}
       </div>
-      <button onclick="window.location.href='post/'+id">点击阅读</button>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: "blog-post",
-  props: ['title', 'time', 'id', 'classify', 'ontop']
-}
+<script setup>
+const props = defineProps([
+    'title', 'time', 'id', 'classify', 'ontop'
+])
 </script>

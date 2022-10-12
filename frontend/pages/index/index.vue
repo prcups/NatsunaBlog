@@ -40,9 +40,10 @@
     method: 'get',
     params: {
       isAll: false
-    }
+    },
+    key: "pageNum"
   }).then(res => {
-    pages = (res.data > 0 ? res.data : 1)
+    pages = (res.data._value > 0 ? res.data._value : 1)
     if (curPage() > pages) {
       useRouter().push("/?page=" + pages)
     }
@@ -51,14 +52,11 @@
       params: {
         page: curPage(),
         isAll: false
-      }
+      },
+      key: "page" + curPage()
     })
   }).then(res => {
     if (res.data) posts = res.data
-  })
-
-  watch(useRoute(), () => {
-      useRouter().go(0)
   })
 
 </script>

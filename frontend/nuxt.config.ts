@@ -2,7 +2,7 @@
 import GlobalConfig from './global.json'
 
 export default defineNuxtConfig({
-    runtimeConfig: {
+    publicRuntimeConfig: {
         Title: GlobalConfig.title,
         Description: GlobalConfig.description,
         Nav: GlobalConfig.nav,

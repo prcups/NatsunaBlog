@@ -1,52 +1,30 @@
 <template>
   <div>
-    <div>
-      <button block variant="info" @click="show">{{ this.classify }}</button>
-    </div>
-    <div>
-      <div>
-        <ul>
-          <li v-for="item in posts" :key="item.id"><a :href="'/post/' + item.id">
-            {{ item.title }}
-          </a></li>
-        </ul>
-      </div>
-    </div>
+    <p>{{ classify }}</p>
+    <ul>
+      <li v-for="item in posts">
+        <NuxtLink :to="'/post/' + item.id">
+          {{ item.title }}
+        </NuxtLink>
+      </li>
+    </ul>
   </div>
 </template>
 
-<script>
-
-import {useFetch} from "nuxt/app";
-
-export default {
-  data() {
-    return {
-      posts: [],
-      visiable: false
-    }
-  },
-  props: [
+<script setup>
+  let posts = []
+  let config = useRuntimeConfig()
+  const props = defineProps([
     'classify'
-  ],
-  methods: {
-    show() {
-      this.visiable = !this.visiable
-      if (this.visiable) {
-        useFetch(GetPostsOfClassify, {
-          method: "GET",
-          params: {
-            classify: this.classify
-          }
-        }).then(res => {
-          this.posts = res.data
-        })
-      }
-    }
-  }
-}
+  ])
+
+  await useFetch(config.GetPostsOfClassify, {
+    method: "get",
+    params: {
+      classify: props.classify
+    },
+    key: "classify" + props.classify
+  }).then(res => {
+    posts = res.data
+  })
 </script>
-
-<style scoped>
-
-</style>

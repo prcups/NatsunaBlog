@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import {setIfChecked} from "@/assets/javascript/check"
 import {useFetch} from "nuxt/app"
 
 export default {

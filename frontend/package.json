@@ -11,6 +11,6 @@
     "nuxt": "3.0.0-rc.11"
   },
   "dependencies": {
-    "mavon-editor": "^2.10.4"
+    "js-md5": "^0.7.3"
   }
 }

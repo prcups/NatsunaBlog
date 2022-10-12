@@ -5,11 +5,11 @@
   "nav": [
     {
       "title": "关于",
-      "url": "https://v-signal.xyz/post/1"
+      "url": "/post/1"
     },
     {
       "title": "札记",
-      "url": "https://v-signal.xyz/post/7"
+      "url": "/post/7"
     }
   ]
 }

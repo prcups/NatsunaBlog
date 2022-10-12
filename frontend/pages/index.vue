@@ -5,14 +5,18 @@
         <h1>{{ config.Title }}</h1>
       </NuxtLink>
       <h3>{{ config.Description }}</h3>
-      <div>
+      <nav>
         <ul>
-          <li>主页</li>
-          <li>分类</li>
-          <li>归档</li>
-          <li v-for="item in config.Nav" :key="item.title">{{ item.title }}</li>
+          <li><NuxtLink to="/">主页</NuxtLink></li>
+          <li><NuxtLink to="/classification">分类</NuxtLink></li>
+          <li><NuxtLink to="/timeline">归档</NuxtLink></li>
+          <li v-for="item in config.Nav">
+            <NuxtLink :to="item.url">
+              {{ item.title }}
+            </NuxtLink>
+          </li>
         </ul>
-      </div>
+      </nav>
     </header>
     <NuxtPage/>
     <footer>
@@ -25,8 +29,6 @@
 </template>
 
 <script setup>
-import {useRuntimeConfig} from "nuxt/app"
-
 const config = useRuntimeConfig()
 
 </script>

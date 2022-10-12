@@ -1,30 +1,24 @@
 <template>
   <div>
     <div>
-      <h3 style="text-align: center;">所有分类</h3>
-      <classify-comp v-for="item in allClassify" :key="item" :classify="item"></classify-comp>
+      <h3>所有分类</h3>
+      <classify-comp v-for="item in allClassify" :classify="item"></classify-comp>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  head() {
-    return {
-      title: "分类"
-    }
-  },
-  data() {
-    return {
-      allClassify: []
-    }
-  },
-  created() {
-    useFetch(this.$config.GetAllClassifyUrl, {
-      method: "GET",
-    }).then(res => {
-      this.allClassify = res.data
-    })
-  }
-}
+<script setup>
+let allClassify = []
+const config = useRuntimeConfig()
+
+useHead({
+  title: "分类 - " + config.Title
+})
+
+await useFetch(config.GetAllClassify, {
+  key: "allClassify"
+}).then(res => {
+  allClassify = res.data
+})
+
 </script>

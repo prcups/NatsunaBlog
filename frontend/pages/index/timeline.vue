@@ -2,34 +2,23 @@
   <div>
     <div>
       <h3>所有归档</h3>
-      <timeline-comp v-for="item in allTimeline" :key="item" :timeline="item"></timeline-comp>
+      <timeline-comp v-for="item in allTimeline" :timeline="item"></timeline-comp>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
+let config = useRuntimeConfig()
+let allTimeline = []
 
-import {useRuntimeConfig} from "nuxt/app"
+useHead({
+  title: "归档" + " - " + config.Title
+})
 
-export default {
+await useFetch(config.GetAllTimeline, {
+  key: "allTimeline"
+}).then(res => {
+  allTimeline = res.data
+})
 
-  head() {
-    return {
-      title: "归档" + " - " + config.Title,
-      config: useRuntimeConfig()
-    }
-  },
-  data() {
-    return {
-      allTimeline: []
-    }
-  },
-  created() {
-    useFetch(config.GetAllTimeline, {
-      method: "GET"
-    }).then(res => {
-      this.allTimeline = res.data
-    })
-  }
-}
 </script>

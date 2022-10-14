@@ -17,16 +17,11 @@
           </ul>
         </div>
         <div>
-          <p>{{ user }}</p>
+          <p v-if="user">{{ user }}</p>
           <button @click="buttonAct">{{ buttonWord }}</button>
         </div>
       </nav>
     </header>
-    <p v-if="useRouter().currentRoute.path === '/admin'">
-      欢迎来到NatsunaBlog控制台！<br>
-      请先点击右上角登录。<br>
-      选择“管理“可编辑或删除您写过的文章。”新建“会创建新文章。<br>
-    </p>
     <NuxtPage/>
   </div>
 </template>
@@ -37,18 +32,11 @@
   let user = ""
   let isChecked = false
 
-  await useFetch(config.CheckUrl, {
-    method: "post"
-  }).then((res) => {
-    user = res.data._value.user
-    isChecked = res.data._value.isChecked
-  })
-
-  console.log(isChecked)
-
   async function logout() {
     await useFetch(config.LogOutUrl, {
-      method: "get"
+      method: "get",
+      server: false,
+      credentials: 'include'
     }).then(res => {
       useRouter().go(0)
     })
@@ -69,4 +57,23 @@
   let buttonWord = computed(() => {
     return isChecked ? "退出" : "登录"
   })
+
+  watch(() => {
+    return useRoute().path
+  }, () => {
+    useRouter().go(0)
+  })
+
+  if (process.client) {
+    await $fetch(config.CheckUrl, {
+      method: "post",
+      server: false,
+      key: "check",
+      credentials: 'include'
+    }).then(res => {
+      isChecked = res.isChecked
+      user = res.user
+    })
+  }
+
 </script>

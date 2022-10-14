@@ -3,7 +3,7 @@
     <p>登录</p>
     <input type="text" placeholder="用户名" v-model="username" />
     <input type="password" placeholder="密码" v-model="password" />
-    <button @click="PostPassword">登录</button>
+    <button @click="postPassword(username, password)">登录</button>
     <p>{{ alert }}</p>
   </div>
 </template>
@@ -16,18 +16,19 @@
   let alert = ""
   let config = useRuntimeConfig()
 
-  async function PostPassword() {
-    await useFetch(config.CheckUrl, {
+  async function postPassword(username, password) {
+    await $fetch(config.CheckUrl, {
       method: "post",
-      params: {
-        username: this.username,
-        password: md5(this.password),
-      }
+      body: JSON.stringify({
+        username: username,
+        password: md5(password)
+      }),
+      credentials: 'include'
     }).then(res => {
-      if (res.data.isChecked === true) {
-        useRouter.go(-1)
+      if (res.isChecked) {
+        useRouter().go(-1)
       } else {
-        this.alert = "用户名或密码错误"
+        alert = "用户名或密码错误"
       }
     })
   }

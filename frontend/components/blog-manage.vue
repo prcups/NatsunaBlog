@@ -1,34 +1,31 @@
 <template>
   <div>
+    <p>{{ title }}</p>
     <p>{{ time }}</p>
     <button><a :href=editUrl>编辑</a></button>
     <button @click="deletePost">删除</button>
   </div>
 </template>
 
-<script>
+<script setup>
+const props = defineProps(['title', 'time', 'id'])
+let config = useRuntimeConfig()
 
-import {useFetch} from "nuxt/app";
+const editUrl = computed(() => {
+  return '/admin/modify/' + props.id
+})
 
-export default {
-  name: "blog-manage",
-  props: ['title', 'time', 'id'],
-  methods: {
-    deletePost() {
-      useFetch(DeletePostUrl, {
-        method: "post",
-        params: {
-          id: this.id
-        }
-      }).then(res => {
-            this.$router.go(0)
-          })
+async function deletePost() {
+  await $fetch(config.DeletePostUrl, {
+    method: 'post',
+    body: {
+      id: props.id
+    },
+    credentials: 'include'
+  }).then(res => {
+    if (res.isDeleted) {
+      useRouter().go(0)
     }
-  },
-  computed: {
-    editUrl: function () {
-      return "/admin/modify/" + this.id
-    }
-  }
+  })
 }
 </script>

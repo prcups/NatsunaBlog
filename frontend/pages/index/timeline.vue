@@ -15,10 +15,10 @@ useHead({
   title: "归档" + " - " + config.Title
 })
 
-await useFetch(config.GetAllTimeline, {
+await $fetch(config.GetAllTimeline, {
   key: "allTimeline"
 }).then(res => {
-  allTimeline = res.data
+  allTimeline = res
 })
 
 </script>

@@ -4,10 +4,8 @@
       <br>
       <p>你还未发表过文章呢！</p>
     </div>
-    <div v-else>
-      <div>
-        <blog-post v-for="item in posts" :key="item.id" v-bind="item"></blog-post>
-      </div>
+    <div id="container" v-else>
+      <blog-post v-for="item in posts" :key="item.id" v-bind="item"></blog-post>
     </div>
     <br>
   </main>
@@ -19,7 +17,7 @@
   const config = useRuntimeConfig()
 
   function linkGen(pageNum) {
-    return pageNum === 1 ? '?' : `?page=${pageNum}`
+    return pageNum === 1 ? '?' : '?page=' + pageNum
   }
   function curPage() {
     let queryPage = useRoute().query.page
@@ -36,18 +34,18 @@
     ]
   })
 
-  await useFetch(config.GetPageNumUrl, {
+  await $fetch(config.GetPageNumUrl, {
     method: 'get',
     params: {
       isAll: false
     },
     key: "pageNum"
   }).then(res => {
-    pages = (res.data._value > 0 ? res.data._value : 1)
+    pages = (res > 0 ? res : 1)
     if (curPage() > pages) {
       useRouter().push("/?page=" + pages)
     }
-    return useFetch(config.GetPostsUrl, {
+    return $fetch(config.GetPostsUrl, {
       method: 'get',
       params: {
         page: curPage(),
@@ -56,7 +54,15 @@
       key: "page" + curPage()
     })
   }).then(res => {
-    if (res.data) posts = res.data
+    posts = res
   })
 
 </script>
+
+<style>
+  #container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1rem;
+  }
+</style>

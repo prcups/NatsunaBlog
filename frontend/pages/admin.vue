@@ -27,13 +27,12 @@
 </template>
 
 <script setup>
-  import {useFetch} from "nuxt/app";
   let config = useRuntimeConfig()
   let user = ""
   let isChecked = false
 
   async function logout() {
-    await useFetch(config.LogOutUrl, {
+    await $Fetch(config.LogOutUrl, {
       method: "get",
       server: false,
       credentials: 'include'

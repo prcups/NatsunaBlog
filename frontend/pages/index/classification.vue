@@ -15,10 +15,10 @@ useHead({
   title: "分类 - " + config.Title
 })
 
-await useFetch(config.GetAllClassify, {
+await $fetch(config.GetAllClassify, {
   key: "allClassify"
 }).then(res => {
-  allClassify = res.data
+  allClassify = res
 })
 
 </script>

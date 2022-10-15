@@ -31,7 +31,7 @@ let desp = computed(() => {
   return String(post.content).substring(0, 20)
 })
 
-await useFetch(config.GetOnePostUrl, {
+await $fetch(config.GetOnePostUrl, {
   method: "get",
   params: {
     id: useRoute().params.id,
@@ -39,10 +39,10 @@ await useFetch(config.GetOnePostUrl, {
   },
   key: "post" + useRoute().params.id
 }).then(res => {
-  if (res.data._value == "") {
+  if (res == "") {
    useRouter().push("/404")
   }
-  post = res.data._value
+  post = res
 
 })
 

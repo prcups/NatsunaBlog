@@ -56,7 +56,7 @@ if (process.client) {
       key: "adminPage" + curPage()
     })
   }).then(res => {
-    if (res) posts = res
+    posts = res
   })
 }
 

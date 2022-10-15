@@ -16,13 +16,13 @@ let config = useRuntimeConfig()
 const props = defineProps(['timeline'])
 
 let posts = []
-await useFetch(config.GetPostsOfTimeline, {
+await $fetch(config.GetPostsOfTimeline, {
   method: "get",
   params: {
     timeline: props.timeline
   },
   key: "timeline" + props.timeline
 }).then(res => {
-  posts = res.data
+  posts = res
 })
 </script>

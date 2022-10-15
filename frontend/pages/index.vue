@@ -1,11 +1,10 @@
 <template>
   <div>
     <header>
-      <NuxtLink to="/">
-        <h1>{{ config.Title }}</h1>
-      </NuxtLink>
-      <h3>{{ config.Description }}</h3>
       <nav>
+        <NuxtLink id="title" to="/">
+          <p>{{ config.Title }}</p>
+        </NuxtLink>
         <ul>
           <li><NuxtLink to="/">主页</NuxtLink></li>
           <li><NuxtLink to="/classification">分类</NuxtLink></li>
@@ -17,13 +16,11 @@
           </li>
         </ul>
       </nav>
+      <p id="description">{{ config.Description }}</p>
     </header>
     <NuxtPage/>
     <footer>
-      <div>
-        <hr>
-        <p>2022 - 由 <a href="https://github.com/prcups/NatsunaBlog/">NatsunaBlog</a> 驱动</p>
-      </div>
+      <p>2022 - 由 <a href="https://github.com/prcups/NatsunaBlog/">NatsunaBlog</a> 驱动</p>
     </footer>
   </div>
 </template>
@@ -32,3 +29,66 @@
 const config = useRuntimeConfig()
 
 </script>
+
+<style>
+
+header {
+  background-image: url(@/assets/image/bg.avif);
+  background-size: cover;
+  background-position: 50% 50%;
+  display: flex;
+  flex-wrap: wrap;
+  height: 100vh;
+  justify-content: center;
+}
+
+nav {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: fixed;
+  color: white;
+}
+
+#title {
+  text-decoration-line: none;
+  font-size: 1.2rem;
+  margin-left: 3rem;
+  color: inherit;
+}
+
+nav ul {
+  margin-right: 5rem;
+  font-size: 1.2rem;
+  color: inherit;
+}
+
+nav ul li{
+  display: inline-block;
+  margin-left: 2rem;
+  color: inherit;
+}
+
+nav ul li a {
+  text-decoration-line: none;
+  color: inherit;
+}
+
+#description {
+  text-align: center;
+  font-size: 3rem;
+  color: white;
+  align-self: center;
+}
+
+footer {
+  text-align: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  background-color: black;
+  color: white;
+  font-size: 1rem;
+}
+
+</style>

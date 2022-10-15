@@ -18,13 +18,13 @@
     'classify'
   ])
 
-  await useFetch(config.GetPostsOfClassify, {
+  await $fetch(config.GetPostsOfClassify, {
     method: "get",
     params: {
       classify: props.classify
     },
     key: "classify" + props.classify
   }).then(res => {
-    posts = res.data
+    posts = res
   })
 </script>

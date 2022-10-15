@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div>
-      <h3>所有分类</h3>
-      <classify-comp v-for="item in allClassify" :classify="item"></classify-comp>
-    </div>
+    <classify-comp v-for="item in allClassify" :classify="item"></classify-comp>
   </div>
 </template>
 

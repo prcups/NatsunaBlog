@@ -1,11 +1,7 @@
 <template>
   <div>
-    <div v-if="isChecked">
-      <h3>所有文章</h3>
-      <br>
-      <div>
-        <blog-manage v-for="item in posts" :key="item.id" v-bind="item"></blog-manage>
-      </div>
+    <div id="admin-manage" v-if="isChecked">
+      <blog-manage v-for="item in posts" :key="item.id" v-bind="item"></blog-manage>
     </div>
     <div v-else>
       <p>请先登录</p>
@@ -19,12 +15,13 @@ let isChecked = false
 let posts = []
 let pages = 1
 let config = useRuntimeConfig()
+let route = useRoute()
 
 function linkGen(pageNum) {
   return pageNum === 1 ? '?' : '?page=' + pageNum
 }
 function curPage() {
-  let queryPage = useRoute().query.page
+  let queryPage = route.query.page
   return queryPage ? queryPage : 1
 }
 
@@ -61,3 +58,12 @@ if (process.client) {
 }
 
 </script>
+
+<style>
+  #admin-manage {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(256px, 1fr));
+    grid-auto-rows: minmax(100px, auto);
+    grid-gap: 20px;
+  }
+</style>

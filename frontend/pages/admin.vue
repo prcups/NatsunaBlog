@@ -1,28 +1,23 @@
 <template>
   <div>
-    <header>
-      <nav>
-        <NuxtLink href="/admin">NatsunaBlog控制台</NuxtLink>
-        <div>
-          <ul>
-            <li>
-              <NuxtLink href="/admin/manage">管理</NuxtLink>
-            </li>
-            <li>
-              <NuxtLink href="/admin/modify/-1">新建</NuxtLink>
-            </li>
-            <li>
-              <NuxtLink href="/">返回首页</NuxtLink>
-            </li>
-          </ul>
-        </div>
-        <div>
-          <p v-if="user">{{ user }}</p>
-          <button @click="buttonAct">{{ buttonWord }}</button>
-        </div>
-      </nav>
-    </header>
-    <NuxtPage/>
+    <client-only class="admin">
+      <div class="admin-nav">
+        <NuxtLink id="admin-title" to="/admin">NatsunaBlog控制台</NuxtLink>
+        <ul>
+          <li>
+            <NuxtLink to="/admin/manage">管理</NuxtLink>
+          </li>
+          <li>
+            <NuxtLink to="/admin/modify/-1">新建</NuxtLink>
+          </li>
+          <li>
+            <NuxtLink to="/">返回首页</NuxtLink>
+          </li>
+        </ul>
+        <button id="toLogin" @click="buttonAct">{{ buttonWord + " " + user }}</button>
+      </div>
+      <NuxtPage/>
+    </client-only>
   </div>
 </template>
 
@@ -32,7 +27,7 @@
   let isChecked = false
 
   async function logout() {
-    await $Fetch(config.LogOutUrl, {
+    await $fetch(config.LogOutUrl, {
       method: "get",
       server: false,
       credentials: 'include'
@@ -76,3 +71,40 @@
   }
 
 </script>
+
+<style>
+  .admin-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .admin-nav ul li {
+    display: inline-block;
+    margin: 0 1rem;
+  }
+
+  .admin-nav ul li a {
+    text-decoration: none;
+    color: white;
+  }
+
+  button {
+    border: none;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  #toLogin {
+    margin-right: 1rem;
+  }
+
+  #admin-title {
+    text-decoration: none;
+    color: white;
+    margin-left: 1rem;
+  }
+</style>

@@ -7,7 +7,6 @@
     <div id="container" v-else>
       <blog-post v-for="item in posts" :key="item.id" v-bind="item"></blog-post>
     </div>
-    <br>
   </main>
 </template>
 
@@ -15,12 +14,14 @@
   let posts = []
   let pages = 1
   const config = useRuntimeConfig()
+  const route = useRoute()
 
   function linkGen(pageNum) {
     return pageNum === 1 ? '?' : '?page=' + pageNum
   }
+
   function curPage() {
-    let queryPage = useRoute().query.page
+    let queryPage = route.query.page
     return queryPage ? queryPage : 1
   }
 
@@ -61,8 +62,7 @@
 
 <style>
   #container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 1rem;
+    display: flex;
+    flex-direction: column;
   }
 </style>

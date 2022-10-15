@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <p>登录</p>
+  <div id="login-area">
+    <h1>登录</h1>
     <input type="text" placeholder="用户名" v-model="username" />
     <input type="password" placeholder="密码" v-model="password" />
     <button @click="postPassword(username, password)">登录</button>
@@ -33,3 +33,13 @@
     })
   }
 </script>
+
+<style>
+  #login-area {
+    display: flex;
+    flex-direction: column;
+    padding: 30%;
+    align-items: center;
+    justify-content: center;
+  }
+</style>

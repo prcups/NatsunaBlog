@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div>
-      <h3>所有归档</h3>
-      <timeline-comp v-for="item in allTimeline" :timeline="item"></timeline-comp>
-    </div>
+    <timeline-comp v-for="item in allTimeline" :timeline="item"></timeline-comp>
   </div>
 </template>
 

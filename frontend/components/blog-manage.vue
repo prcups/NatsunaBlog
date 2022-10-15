@@ -1,8 +1,10 @@
 <template>
-  <div>
-    <p>{{ title }}</p>
-    <p>{{ time }}</p>
-    <button><a :href=editUrl>编辑</a></button>
+  <div class="admin-blog-manage">
+    <div class="admin-blog-info">
+      <p>{{ title }}</p>
+      <p>{{ time }}</p>
+    </div>
+    <button><a class="admin-edit-link" :href=editUrl>编辑</a></button>
     <button @click="deletePost">删除</button>
   </div>
 </template>
@@ -23,9 +25,27 @@ async function deletePost() {
     },
     credentials: 'include'
   }).then(res => {
-    if (res.isDeleted) {
+    if (res == "OK") {
       useRouter().go(0)
     }
   })
 }
 </script>
+
+<style>
+.admin-blog-manage {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+.admin-blog-info {
+  width: 100%;
+}
+.admin-edit-link {
+  text-decoration: none;
+  color: black;
+}
+</style>

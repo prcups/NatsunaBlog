@@ -1,10 +1,14 @@
 <template>
-  <div id="post">
-    <NuxtLink :to="'/post/' + id">{{ (ontop ? '⭐ ' : '') + title }}</NuxtLink>
-    <div>
-      分类：{{ classify }}
-      <br>
-      {{ time }}
+  <div class="post">
+
+    <div class="img-container">
+      <img :src="'../assets/image/anime/' + (Math.floor(Math.random() * 8) + 1) + '.avif'"  alt=""/>
+    </div>
+
+    <div class="post-info">
+      <NuxtLink class="post-title" :to="'/post/' + id">{{ (ontop ? '⭐ ' : '') + title }}</NuxtLink>
+      <p>{{ classify }}</p>
+      <p>{{ time }}</p>
     </div>
   </div>
 </template>
@@ -16,11 +20,42 @@ const props = defineProps([
 </script>
 
 <style>
-#post {
+.post {
   margin-top: 1rem;
-  border: black solid;
   padding: 1rem;
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: #c7b370;
+}
+
+.img-container {
+  width: 24rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.post-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1 15rem;
   text-align: center;
+  justify-content: center;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.post-title{
+  color: white;
+  text-decoration: none;
+  font-size: 1.5rem;
 }
 
 </style>

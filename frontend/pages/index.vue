@@ -32,10 +32,16 @@ const config = useRuntimeConfig()
 
 <style>
 
+body {
+  background: #5a544b;
+  color: white;
+  margin: 0;
+}
+
 header {
   background-image: url(@/assets/image/bg.avif);
   background-size: cover;
-  background-position: 50% 50%;
+  background-position: 50% 60%;
   display: flex;
   flex-wrap: wrap;
   height: 100vh;
@@ -48,18 +54,17 @@ nav {
   flex-direction: row;
   justify-content: space-between;
   position: fixed;
-  color: white;
 }
 
 #title {
   text-decoration-line: none;
   font-size: 1.2rem;
-  margin-left: 3rem;
+  margin-left: 5%;
   color: inherit;
 }
 
 nav ul {
-  margin-right: 5rem;
+  margin-right: 5%;
   font-size: 1.2rem;
   color: inherit;
 }
@@ -77,18 +82,30 @@ nav ul li a {
 
 #description {
   text-align: center;
-  font-size: 3rem;
+  font-size: 6vw;
+  max-font-size: 6vw;
   color: white;
   align-self: center;
 }
 
+@media screen and (min-width: 1200px) {
+  #description {
+    font-size: 72px;
+  }
+}
+
 footer {
+  margin-top: 1rem;
   text-align: center;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  background-color: black;
+  background-color: #1f3134;
   color: white;
   font-size: 1rem;
+}
+
+footer a {
+  color: white;
 }
 
 </style>

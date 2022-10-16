@@ -37,15 +37,16 @@
 let config = useRuntimeConfig()
 let user = ""
 let isChecked = false
+const route = useRoute()
 
-let post = {
+let post = reactive({
   title: "",
   content: "",
   classify: "",
   tag: "",
   ontop: false,
   hid: false
-}
+})
 
 import MdEditor from "md-editor-v3"
 import "md-editor-v3/lib/style.css"
@@ -70,10 +71,11 @@ const onUploadImg = async (files, callback) => {
 };
 
 async function summit() {
+  console.log(post)
   await $fetch(config.UpdatePostUrl, {
     method: "post",
     body: {
-      id: useRoute().params.id,
+      id: route.params.id,
       title: post.title,
       content: post.content,
       classify: post.classify,
@@ -107,7 +109,7 @@ if (process.client) {
     if (res === "") {
       useRouter().push("/404")
     }
-    post = res
+    post = reactive(res)
   })
 }
 </script>

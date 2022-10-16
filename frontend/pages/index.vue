@@ -18,7 +18,7 @@
       </nav>
       <p id="description">{{ config.Description }}</p>
     </header>
-    <NuxtPage/>
+    <NuxtPage :key="$route.fullPath" />
     <footer>
       <p>2022 - 由 <a href="https://github.com/prcups/NatsunaBlog/">NatsunaBlog</a> 驱动</p>
     </footer>

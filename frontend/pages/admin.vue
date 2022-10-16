@@ -16,7 +16,7 @@
         </ul>
         <button id="toLogin" @click="buttonAct">{{ buttonWord + " " + user }}</button>
       </div>
-      <NuxtPage/>
+      <NuxtPage :key="$route.fullPath" />
     </client-only>
   </div>
 </template>

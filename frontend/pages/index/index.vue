@@ -7,6 +7,7 @@
     <div id="container" v-else>
       <blog-post v-for="item in posts" :key="item.id" v-bind="item"></blog-post>
     </div>
+    <pager v-if="pages > 1" :current="curPage()" :total="pages" base="/"></pager>
   </main>
 </template>
 
@@ -16,13 +17,9 @@
   const config = useRuntimeConfig()
   const route = useRoute()
 
-  function linkGen(pageNum) {
-    return pageNum === 1 ? '?' : '?page=' + pageNum
-  }
-
   function curPage() {
     let queryPage = route.query.page
-    return queryPage ? queryPage : 1
+    return parseInt(queryPage ? queryPage : 1)
   }
 
   useHead({
@@ -42,7 +39,7 @@
     },
     key: "pageNum"
   }).then(res => {
-    pages = (res > 0 ? res : 1)
+    pages = (parseInt(res) > 0 ? parseInt(res) : 1)
     if (curPage() > pages) {
       useRouter().push("/?page=" + pages)
     }
@@ -54,7 +51,7 @@
       },
       key: "page" + curPage()
     })
-  }).then(res => {
+  }).then((res) => {
     posts = res
   })
 

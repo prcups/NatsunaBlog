@@ -1,7 +1,10 @@
 <template>
   <div>
-    <div id="admin-manage" v-if="isChecked">
-      <blog-manage v-for="item in posts" :key="item.id" v-bind="item"></blog-manage>
+    <div v-if="isChecked">
+      <div id="admin-manage">
+        <blog-manage v-for="item in posts" :key="item.id" v-bind="item"></blog-manage>
+      </div>
+      <pager v-if="pages > 1" :current="curPage()" :total="pages" base="/admin/manage"></pager>
     </div>
     <div v-else>
       <p>请先登录</p>
@@ -17,12 +20,9 @@ let pages = 1
 let config = useRuntimeConfig()
 let route = useRoute()
 
-function linkGen(pageNum) {
-  return pageNum === 1 ? '?' : '?page=' + pageNum
-}
 function curPage() {
   let queryPage = route.query.page
-  return queryPage ? queryPage : 1
+  return parseInt(queryPage ? queryPage : 1)
 }
 
 if (process.client) {
@@ -40,7 +40,7 @@ if (process.client) {
       key: "adminPageNum"
     })
   }).then(res => {
-    pages = (res > 0 ? res : 1)
+    pages = parseInt(res > 0 ? res : 1)
     if (curPage() > pages) {
       useRouter().push("/?page=" + pages)
     }

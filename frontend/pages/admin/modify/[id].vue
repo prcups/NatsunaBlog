@@ -20,9 +20,9 @@
         <input v-model="post.tag" />
       </div>
       <div>
-        <input type="checkbox" :checked="post.ontop" @input="post.ontop = $event" value="1" />
+        <input type="checkbox" v-model="post.ontop" />
           置顶
-        <input type="checkbox" :checked="post.hid" @input="post.hid = $event" value="1" />
+        <input type="checkbox" v-model="post.hid" />
           隐藏
       </div>
       <button @click="summit">发布</button>
@@ -38,14 +38,15 @@ let config = useRuntimeConfig()
 let user = ""
 let isChecked = false
 const route = useRoute()
+const router = useRouter()
 
 let post = reactive({
   title: "",
   content: "",
   classify: "",
   tag: "",
-  ontop: false,
-  hid: false
+  ontop: 0,
+  hid: 0
 })
 
 import MdEditor from "md-editor-v3"
@@ -71,7 +72,6 @@ const onUploadImg = async (files, callback) => {
 };
 
 async function summit() {
-  console.log(post)
   await $fetch(config.UpdatePostUrl, {
     method: "post",
     body: {
@@ -85,7 +85,7 @@ async function summit() {
     },
     credentials: 'include'
   }).then(res => {
-    useRouter().push("/post/" + parseInt(res))
+    router.push("/post/" + parseInt(res))
   })
 }
 
@@ -97,15 +97,19 @@ if (process.client) {
     credentials: 'include'
   }).then(res => {
     isChecked = res.isChecked
+    if (route.params.id === -1) {
+      return
+    }
     return $fetch(config.GetOnePostUrl, {
       method: "get",
       params: {
-        id: useRoute().params.id,
+        id: route.params.id,
         visitOnly: false
       },
-      key: "modifyPost" + useRoute().params.id
+      key: "modifyPost" + route.params.id
     })
   }).then(res => {
+    if (route.params.id === "-1") return
     if (res === "") {
       useRouter().push("/404")
     }

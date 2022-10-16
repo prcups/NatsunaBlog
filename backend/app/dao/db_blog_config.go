@@ -5,20 +5,22 @@
 package dao
 
 import (
-	"NatsunaBlog/app/dao/internal"
+	"backend/app/dao/internal"
 )
 
-// dBBLOGCONFIGDao is the manager for logic model data accessing
-// and custom defined data operations functions management. You can define
-// methods on it to extend its functionality as you wish.
+// internalDBBLOGCONFIGDao is internal type for wrapping internal DAO implements.
+type internalDBBLOGCONFIGDao = *internal.DBBLOGCONFIGDao
+
+// dBBLOGCONFIGDao is the data access object for table DB_BLOG_CONFIG.
+// You can define custom methods on it to extend its functionality as you wish.
 type dBBLOGCONFIGDao struct {
-	internal.DBBLOGCONFIGDao
+	internalDBBLOGCONFIGDao
 }
 
 var (
 	// DBBLOGCONFIG is globally public accessible object for table DB_BLOG_CONFIG operations.
 	DBBLOGCONFIG = dBBLOGCONFIGDao{
-		internal.DBBLOGCONFIG,
+		internal.NewDBBLOGCONFIGDao(),
 	}
 )
 

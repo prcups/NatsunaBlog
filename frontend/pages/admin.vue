@@ -52,12 +52,6 @@
     return isChecked ? "退出" : "登录"
   })
 
-  watch(() => {
-    return useRoute().path
-  }, () => {
-    useRouter().go(0)
-  })
-
   if (process.client) {
     await $fetch(config.CheckUrl, {
       method: "post",

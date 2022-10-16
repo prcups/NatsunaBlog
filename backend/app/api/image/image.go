@@ -1,19 +1,18 @@
 package image
 
 import (
-	"github.com/gogf/gf/net/ghttp"
-	"github.com/gogf/gf/os/gfile"
+	"github.com/gogf/gf/v2/net/ghttp"
 	"log"
 )
 
-type UploadImageRes struct{
+type UploadImageRes struct {
 	Name string `json:"name"`
 }
 
 var imageSaveUrl = "static/upload_images"
 
 func UploadImage(r *ghttp.Request) {
-	if r.Session.GetString("user") == "" {
+	if t, _ := r.Session.Get("user"); t.String() == "" {
 		r.Response.WriteExit("Not Login")
 	}
 	file := r.GetUploadFile("image")
@@ -21,24 +20,10 @@ func UploadImage(r *ghttp.Request) {
 		r.Response.WritelnExit("No File to Upload")
 	}
 	saveFileName, err := file.Save(imageSaveUrl, true)
-	if err != nil{
+	if err != nil {
 		log.Fatal(err)
 	}
 	r.Response.WriteJsonExit(UploadImageRes{
 		Name: saveFileName,
 	})
-}
-
-func DeleteImage(r *ghttp.Request) {
-	if r.Session.GetString("user") == "" {
-		r.Response.WriteExit("Not Login")
-	}
-	filePath := imageSaveUrl + "/" + gfile.Basename(r.GetString("url"))
-	if gfile.Exists(filePath) {
-		err := gfile.Remove(filePath)
-		if err != nil {
-			log.Fatal(err)
-		}
-	}
-	r.Response.WritelnExit("OK")
 }

@@ -1,5 +1,5 @@
 {
-  "base_url": "https://v-signal.xyz",
+  "base_url": "http://127.0.0.1:8199",
   "title": "SignKirigami",
   "description": "寻找世界的伊甸园",
   "nav": [

@@ -11,9 +11,9 @@
 <script setup>
   import md5 from "js-md5";
 
-  let username = ""
-  let password = ""
-  let alert = ""
+  let username = ref("")
+  let password = ref("")
+  let alert = ref("")
   let config = useRuntimeConfig()
 
   async function postPassword(username, password) {
@@ -28,7 +28,7 @@
       if (res.isChecked) {
         useRouter().go(-1)
       } else {
-        alert = "用户名或密码错误"
+        alert.value = "用户名或密码错误"
       }
     })
   }
@@ -38,7 +38,7 @@
   #login-area {
     display: flex;
     flex-direction: column;
-    padding: 30%;
+    padding: 20%;
     align-items: center;
     justify-content: center;
   }

@@ -5,20 +5,22 @@
 package dao
 
 import (
-	"NatsunaBlog/app/dao/internal"
+	"backend/app/dao/internal"
 )
 
-// dBBLOGPOSTDao is the manager for logic model data accessing
-// and custom defined data operations functions management. You can define
-// methods on it to extend its functionality as you wish.
+// internalDBBLOGPOSTDao is internal type for wrapping internal DAO implements.
+type internalDBBLOGPOSTDao = *internal.DBBLOGPOSTDao
+
+// dBBLOGPOSTDao is the data access object for table DB_BLOG_POST.
+// You can define custom methods on it to extend its functionality as you wish.
 type dBBLOGPOSTDao struct {
-	internal.DBBLOGPOSTDao
+	internalDBBLOGPOSTDao
 }
 
 var (
 	// DBBLOGPOST is globally public accessible object for table DB_BLOG_POST operations.
 	DBBLOGPOST = dBBLOGPOSTDao{
-		internal.DBBLOGPOST,
+		internal.NewDBBLOGPOSTDao(),
 	}
 )
 

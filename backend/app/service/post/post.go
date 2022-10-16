@@ -1,10 +1,10 @@
 package post
 
 import (
-	"NatsunaBlog/app/dao"
+	"backend/app/dao"
 	"database/sql"
-	"github.com/gogf/gf/frame/g"
-	"github.com/gogf/gf/net/ghttp"
+	"github.com/gogf/gf/v2/frame/g"
+	"github.com/gogf/gf/v2/net/ghttp"
 	"math"
 )
 
@@ -12,63 +12,79 @@ const (
 	PostsInOnePage int = 6
 )
 
-//博客简要信息
+// 博客简要信息
 type GetPostsElement struct {
-	Id int			`json:"id"`
-	Time string	`json:"time"`
-	Title string	`json:"title"`
-	OnTop bool `json:"ontop"`
-	Tag string `json:"tag"`
+	Id       int    `json:"id"`
+	Time     string `json:"time"`
+	Title    string `json:"title"`
+	OnTop    bool   `json:"ontop"`
+	Tag      string `json:"tag"`
 	Classify string `json:"classify"`
 }
 
-//获取总页数
+// 博客完整信息
+type GetOnePostElement struct {
+	Id         int    `json:"id"`
+	Time       string `json:"time"`
+	TimeLine   string `json:"timeline"`
+	Title      string `json:"title"`
+	Content    string `json:"content"`
+	OnTop      bool   `json:"ontop"`
+	Tag        string `json:"tag"`
+	Classify   string `json:"classify"`
+	Hid        int    `json:"hid"`
+	VisitTimes int    `json:"visit_times"`
+	Author     string `json:"author"`
+}
+
+// 获取总页数
 func GetPageNum(r *ghttp.Request) {
-	isAll := r.GetBool("isAll")
+	isAll := r.Get("isAll").Bool()
 	var postNum int
 	var err error
 	if !isAll {
-		postNum, err = dao.DBBLOGPOST.
+		postNum, err = dao.DBBLOGPOST.Ctx(r.GetCtx()).
 			Where("hid = ?", 0).
 			Count()
 	} else {
-		postNum, err = dao.DBBLOGPOST.Count()
+		postNum, err = dao.DBBLOGPOST.Ctx(r.GetCtx()).Count()
 	}
-	if err != nil{
+	if err != nil {
 		r.Response.WritelnExit("GET PAGENUM: " + err.Error())
 	}
-	r.Response.WritelnExit( int(math.Ceil(float64(postNum) / float64(PostsInOnePage))))
+	r.Response.WritelnExit(int(math.Ceil(float64(postNum) / float64(PostsInOnePage))))
 }
 
-//获取单页博客所有内容
+// 获取单页博客所有内容
 func GetOnePost(r *ghttp.Request) {
-	postID := r.GetInt("id")
-	post, err := dao.DBBLOGPOST.One("id = ?", postID)
+	postID := r.Get("id").Int()
+	var post *GetOnePostElement
+	err := dao.DBBLOGPOST.Ctx(r.GetCtx()).Where("id = ?", postID).Scan(&post)
 	if err != nil {
 		r.Response.WritelnExit("GET ONE POST: " + err.Error())
 	}
 	if post == nil {
 		r.Response.WriteExit()
 	}
-	if r.GetBool("visitOnly") {
-		dao.DBBLOGPOST.Update(g.Map{"visit_times": post.VISITTIMES + 1}, "id", postID)
+	if r.Get("visitOnly").Bool() {
+		_, _ = dao.DBBLOGPOST.Ctx(r.GetCtx()).Update(g.Map{"visit_times": post.VisitTimes + 1}, "id", postID)
 	}
 	r.Response.WriteJsonExit(post)
 }
 
-//获取当前页博客列表
+// 获取当前页博客列表
 func GetPosts(r *ghttp.Request) {
-	page := r.GetInt("page")
-	isAll := r.GetBool("isAll")
+	page := r.Get("page").Int()
+	isAll := r.Get("isAll").Bool()
 	var getCurPosts []*GetPostsElement
 	var err error
-	if (isAll) {
-		err = dao.DBBLOGPOST.
+	if isAll {
+		err = dao.DBBLOGPOST.Ctx(r.GetCtx()).
 			Order("id desc").
 			Limit((page-1)*PostsInOnePage, PostsInOnePage).
 			Scan(&getCurPosts)
 	} else {
-		err = dao.DBBLOGPOST.
+		err = dao.DBBLOGPOST.Ctx(r.GetCtx()).
 			Where("hid = ?", 0).
 			Order("ontop desc, id desc").
 			Limit((page-1)*PostsInOnePage, PostsInOnePage).
@@ -80,71 +96,73 @@ func GetPosts(r *ghttp.Request) {
 	r.Response.WriteJsonExit(getCurPosts)
 }
 
-//删除博客
+// 删除博客
 func DeletePost(r *ghttp.Request) {
-	if r.Session.GetString("user") == "" {
+	if s, _ := r.Session.Get("user"); s.String() == "" {
 		r.Response.Writeln("Not Login")
 	}
 	postID := r.Get("id")
-	_, err := dao.DBBLOGPOST.Delete("id = ?", postID)
+	_, err := dao.DBBLOGPOST.Ctx(r.GetCtx()).Delete("id = ?", postID)
 	if err != nil {
-		r.Response.WritelnExit("DELETE: "+ err.Error())
+		r.Response.WritelnExit("DELETE: " + err.Error())
 	}
 	r.Response.WritelnExit("OK")
 }
 
-//更新或新建博客
+// 更新或新建博客
 func UpdatePost(r *ghttp.Request) {
-	if r.Session.GetString("user") == "" {
+	if s, _ := r.Session.Get("user"); s.String() == "" {
 		r.Response.Writeln("Not Login")
 	}
-	postID := int64(r.GetInt("id"))
+	postID := int64(r.Get("id").Int())
 	var result sql.Result
 	var err error
-	title := r.GetString("title")
+	title := r.Get("title").String()
 	if title == "" {
 		title = "未命名"
 	}
-	hid := r.GetInt("hid")
+	hid := r.Get("hid").Int()
 	if hid != 0 && hid != 1 {
 		hid = 0
 	}
-	ontop := r.GetInt("ontop")
+	ontop := r.Get("ontop").Int()
 	if ontop != 0 && ontop != 1 {
 		ontop = 0
 	}
-	classify := r.GetString("classify")
-		if classify == "" {
+	classify := r.Get("classify").String()
+	if classify == "" {
 		classify = "默认分类"
 	}
 
 	if postID == -1 {
-		result, err = dao.DBBLOGPOST.Insert(g.Map{
-			"title": title,
-			"content": r.GetString("content"),
-			"author": r.Session.GetString("user"),
+		authorVar, _ := r.Session.Get("user")
+		result, err = dao.DBBLOGPOST.Ctx(r.GetCtx()).Insert(g.Map{
+			"title":       title,
+			"content":     r.Get("content").String(),
+			"author":      authorVar.String(),
 			"visit_times": 0,
-			"hid": hid,
-			"ontop": ontop,
-			"tag": r.GetString("tag"),
-			"classify": classify,
+			"hid":         hid,
+			"ontop":       ontop,
+			"tag":         r.Get("tag").String(),
+			"classify":    classify,
 		})
-		if err != nil{
-			r.Response.WritelnExit("CREATE POSTS: "+ err.Error())
+		if err != nil {
+			r.Response.WritelnExit("CREATE POSTS: " + err.Error())
 		}
 		postID, _ = result.LastInsertId()
 	} else {
-		result, err = dao.DBBLOGPOST.Update(g.Map{
-			"title": title,
-			"content": r.GetString("content"),
-			"author": r.Session.GetString("user"),
-			"hid": hid,
-			"ontop": ontop,
-			"tag": r.GetString("tag"),
+		authorVar, _ := r.Session.Get("user")
+		result, err = dao.DBBLOGPOST.Ctx(r.GetCtx()).Update(g.Map{
+			"title":    title,
+			"content":  r.Get("content").String(),
+			"author":   authorVar.String(),
+			"hid":      hid,
+			"ontop":    ontop,
+			"tag":      r.Get("tag").String(),
 			"classify": classify,
 		}, "id", postID)
 		if err != nil {
-			r.Response.WritelnExit("UPDATE POSTS: "+ err.Error())
+			r.Response.WritelnExit("UPDATE POSTS: " + err.Error())
 		}
 	}
 	r.Response.WritelnExit(postID)

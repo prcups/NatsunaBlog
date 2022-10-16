@@ -1,7 +1,6 @@
 <template>
   <main>
-    <div v-if="posts.length === 0">
-      <br>
+    <div v-if="posts.length === 0" style="text-align: center;">
       <p>你还未发表过文章呢！</p>
     </div>
     <div id="container" v-else>
@@ -52,7 +51,7 @@
       key: "page" + curPage()
     })
   }).then((res) => {
-    posts = res
+    if (res) posts = res
   })
 
 </script>

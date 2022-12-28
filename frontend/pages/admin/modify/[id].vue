@@ -62,13 +62,12 @@ const onUploadImg = async (files, callback) => {
             method: 'POST',
             body: form,
             credentials: 'include'
-          }).then((res) => {
-            callback(config.GetImageBaseUrl + "/" + res.name);
-          })
-            .catch((error) => rej(error))
+          }).then((res) => rev(res))
+            .catch((error) => rej(error));
         });
       })
   );
+  callback(res.map((item) => config.GetImageBaseUrl + "/" + item.name));
 };
 
 async function summit() {

@@ -82,15 +82,17 @@ nav ul li a {
 
 #description {
   text-align: center;
-  font-size: 6vw;
-  max-font-size: 6vw;
+  font-size: 4rem;
   color: white;
   align-self: center;
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (max-aspect-ratio: 3/4) {
+  header {
+    background-image: url(@/assets/image/bg-phone.avif);
+  }
   #description {
-    font-size: 72px;
+    font-size: 2.5rem;
   }
 }
 

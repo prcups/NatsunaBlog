@@ -1,4 +1,4 @@
-# NatsunaBlog 0.3.1
+# NatsunaBlog 0.3.3
 
 ## 一个简单的个人博客程序
 
@@ -9,6 +9,9 @@
 在博文展示的基础上支持分类、归档的基本功能。
 
 ## 更新日志
+NatsunaBlog 0.3.3
+- 修复选择置顶、隐藏无效的问题
+
 NatsunaBlog 0.3.2
 
 - 修复图片不能上传的问题
@@ -37,8 +40,3 @@ NatsunaBlog 0.1.2 (AvaBlog)
 
 - Markdown格式文章的查看、解析、修改、删除
 - 访问次数统计
-
-## 部署方法
-
-1. 安装npm、go。
-2. 安装node依赖：vue/cli

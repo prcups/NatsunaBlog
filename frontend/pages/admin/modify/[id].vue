@@ -112,6 +112,10 @@ if (process.client) {
     if (res === "") {
       useRouter().push("/404")
     }
+    if (res.ontop == 1) res.ontop = true
+    else res.ontop = false
+    if (res.hid == 1) res.hid = true
+    else res.hid = false
     post = reactive(res)
   })
 }

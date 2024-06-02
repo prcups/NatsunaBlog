@@ -2,7 +2,7 @@
   <div class="post">
 
     <div class="img-container">
-      <img :src="'../assets/image/anime/' + (Math.floor(Math.random() * 12) + 1) + '.avif'"  alt=""/>
+      <img :src="'../assets/image/anime/' + (Math.floor(Math.random() * 15) + 1) + '.avif'"  alt=""/>
     </div>
 
     <div class="post-info">

@@ -15,7 +15,7 @@
 
 <script setup>
   let posts = []
-  let config = useRuntimeConfig()
+  let config = useRuntimeConfig().public
   const props = defineProps([
     'classify'
   ])

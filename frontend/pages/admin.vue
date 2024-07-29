@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-  let config = useRuntimeConfig()
+  let config = useRuntimeConfig().public
   let user = ""
   let isChecked = false
 

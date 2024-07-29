@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-  import md5 from "js-md5";
+  import sha256 from "js-sha256";
 
   let username = ref("")
   let password = ref("")
@@ -21,7 +21,7 @@
       method: "post",
       body: JSON.stringify({
         username: username,
-        password: md5(password)
+        password: sha256(password)
       }),
       credentials: 'include'
     }).then(res => {

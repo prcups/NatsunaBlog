@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-let config = useRuntimeConfig()
+let config = useRuntimeConfig().public
 const props = defineProps(['timeline'])
 
 let posts = []

@@ -11,7 +11,7 @@
 
 <script setup>
 const props = defineProps(['title', 'time', 'id'])
-let config = useRuntimeConfig()
+let config = useRuntimeConfig().public
 
 const editUrl = computed(() => {
   return '/admin/modify/' + props.id

@@ -14,7 +14,7 @@
   let username = ref("")
   let password = ref("")
   let alert = ref("")
-  let config = useRuntimeConfig()
+  let config = useRuntimeConfig().public
 
   async function postPassword(username, password) {
     await $fetch(config.CheckUrl, {

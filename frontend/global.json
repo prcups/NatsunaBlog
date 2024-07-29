@@ -1,5 +1,5 @@
 {
-  "base_url": "http://127.0.0.1:8199",
+  "base_url": "https://krgm.moe",
   "title": "SignKirigami",
   "description": "寻找世界的伊甸园",
   "nav": [
@@ -8,7 +8,7 @@
       "url": "/post/1"
     },
     {
-      "title": "札记",
+      "title": "友链",
       "url": "/post/7"
     }
   ]

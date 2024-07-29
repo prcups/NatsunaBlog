@@ -7,6 +7,7 @@ frontend/.cache
 frontend/.output
 frontend/.env
 frontend/dist
+frontend/package-lock.json
 backend/log/
 backend/static/
 backend/public/

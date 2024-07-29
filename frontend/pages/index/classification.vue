@@ -6,7 +6,7 @@
 
 <script setup>
 let allClassify = []
-const config = useRuntimeConfig()
+const config = useRuntimeConfig().public
 
 useHead({
   title: "分类 - " + config.Title

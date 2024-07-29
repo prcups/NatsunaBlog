@@ -15,7 +15,7 @@ import 'highlight.js/styles/monokai.css'
 
 defineNuxtComponent(markdownIt)
 
-const config = useRuntimeConfig()
+const config = useRuntimeConfig().public
 
 let post = {
   title: "",

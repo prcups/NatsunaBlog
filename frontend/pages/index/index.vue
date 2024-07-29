@@ -13,7 +13,7 @@
 <script setup>
   let posts = []
   let pages = 1
-  const config = useRuntimeConfig()
+  const config = useRuntimeConfig().public
   const route = useRoute()
 
   function curPage() {

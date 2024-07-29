@@ -17,7 +17,7 @@
 let isChecked = false
 let posts = []
 let pages = 1
-let config = useRuntimeConfig()
+let config = useRuntimeConfig().public
 let route = useRoute()
 
 function curPage() {

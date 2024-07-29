@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-let config = useRuntimeConfig()
+let config = useRuntimeConfig().public
 let allTimeline = []
 
 useHead({

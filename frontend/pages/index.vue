@@ -26,7 +26,7 @@
 </template>
 
 <script setup>
-const config = useRuntimeConfig()
+const config = useRuntimeConfig().public
 
 </script>
 

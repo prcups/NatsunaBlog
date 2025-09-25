@@ -1,7 +1,7 @@
 package check
 
 import (
-	"backend/app/dao"
+	"blog/app/dao"
 	"github.com/gogf/gf/v2/net/ghttp"
 )
 
@@ -26,7 +26,7 @@ func Check(r *ghttp.Request) {
 			IsChecked: false,
 			User:      "",
 		})
-	} else if c, _ := dao.DBBLOGCONFIG.Ctx(r.GetCtx()).Count("username = ? AND password = ?", r.Get("username"), r.Get("password")); c > 0 {
+	} else if c, _ := dao.DbBlogConfig.Ctx(r.GetCtx()).Count("username = ? AND password = ?", r.Get("username"), r.Get("password")); c > 0 {
 		_ = r.Session.Set("user", r.Get("username"))
 		r.Response.WriteJsonExit(checkRes{
 			IsChecked: true,

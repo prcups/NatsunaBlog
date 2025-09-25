@@ -1,7 +1,7 @@
 package post
 
 import (
-	"backend/app/dao"
+	"blog/app/dao"
 	"database/sql"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"
@@ -43,11 +43,11 @@ func GetPageNum(r *ghttp.Request) {
 	var postNum int
 	var err error
 	if !isAll {
-		postNum, err = dao.DBBLOGPOST.Ctx(r.GetCtx()).
+		postNum, err = dao.DbBlogPost.Ctx(r.GetCtx()).
 			Where("hid = ?", 0).
 			Count()
 	} else {
-		postNum, err = dao.DBBLOGPOST.Ctx(r.GetCtx()).Count()
+		postNum, err = dao.DbBlogPost.Ctx(r.GetCtx()).Count()
 	}
 	if err != nil {
 		r.Response.WritelnExit("GET PAGENUM: " + err.Error())
@@ -59,7 +59,7 @@ func GetPageNum(r *ghttp.Request) {
 func GetOnePost(r *ghttp.Request) {
 	postID := r.Get("id").Int()
 	var post *GetOnePostElement
-	err := dao.DBBLOGPOST.Ctx(r.GetCtx()).Where("id = ?", postID).Scan(&post)
+	err := dao.DbBlogPost.Ctx(r.GetCtx()).Where("id = ?", postID).Scan(&post)
 	if err != nil {
 		r.Response.WritelnExit("GET ONE POST: " + err.Error())
 	}
@@ -67,7 +67,7 @@ func GetOnePost(r *ghttp.Request) {
 		r.Response.WriteExit()
 	}
 	if r.Get("visitOnly").Bool() {
-		_, _ = dao.DBBLOGPOST.Ctx(r.GetCtx()).Update(g.Map{"visit_times": post.VisitTimes + 1}, "id", postID)
+		_, _ = dao.DbBlogPost.Ctx(r.GetCtx()).Update(g.Map{"visit_times": post.VisitTimes + 1}, "id", postID)
 	}
 	r.Response.WriteJsonExit(post)
 }
@@ -79,12 +79,12 @@ func GetPosts(r *ghttp.Request) {
 	var getCurPosts []*GetPostsElement
 	var err error
 	if isAll {
-		err = dao.DBBLOGPOST.Ctx(r.GetCtx()).
+		err = dao.DbBlogPost.Ctx(r.GetCtx()).
 			Order("id desc").
 			Limit((page-1)*PostsInOnePage, PostsInOnePage).
 			Scan(&getCurPosts)
 	} else {
-		err = dao.DBBLOGPOST.Ctx(r.GetCtx()).
+		err = dao.DbBlogPost.Ctx(r.GetCtx()).
 			Where("hid = ?", 0).
 			Order("ontop desc, id desc").
 			Limit((page-1)*PostsInOnePage, PostsInOnePage).
@@ -102,7 +102,7 @@ func DeletePost(r *ghttp.Request) {
 		r.Response.Writeln("Not Login")
 	}
 	postID := r.Get("id")
-	_, err := dao.DBBLOGPOST.Ctx(r.GetCtx()).Delete("id = ?", postID)
+	_, err := dao.DbBlogPost.Ctx(r.GetCtx()).Delete("id = ?", postID)
 	if err != nil {
 		r.Response.WritelnExit("DELETE: " + err.Error())
 	}
@@ -136,7 +136,7 @@ func UpdatePost(r *ghttp.Request) {
 
 	if postID == -1 {
 		authorVar, _ := r.Session.Get("user")
-		result, err = dao.DBBLOGPOST.Ctx(r.GetCtx()).Insert(g.Map{
+		result, err = dao.DbBlogPost.Ctx(r.GetCtx()).Insert(g.Map{
 			"title":       title,
 			"content":     r.Get("content").String(),
 			"author":      authorVar.String(),
@@ -152,7 +152,7 @@ func UpdatePost(r *ghttp.Request) {
 		postID, _ = result.LastInsertId()
 	} else {
 		authorVar, _ := r.Session.Get("user")
-		result, err = dao.DBBLOGPOST.Ctx(r.GetCtx()).Update(g.Map{
+		result, err = dao.DbBlogPost.Ctx(r.GetCtx()).Update(g.Map{
 			"title":    title,
 			"content":  r.Get("content").String(),
 			"author":   authorVar.String(),

@@ -1,0 +1,19 @@
+[server]
+	Address = ":8199"
+	LogPath = "./log/server"
+	LogStdout = false
+	ErrorStack = true
+	ErrorLogEnabled = true
+	ErrorLogPattern = "error.{Ymd}.log"
+	AccessLogEnabled = true
+	AccessLogPattern = "access.{Ymd}.log"
+
+[database]
+	[database.default]
+		link = "mysql:db_blog:Hidamari@tcp(127.0.0.1:3306)/db_blog"
+
+[gfcli]
+	[[gfcli.gen.dao]]
+		link = "mysql:db_blog:Hidamari@tcp(127.0.0.1:3306)/db_blog"
+		jsonCase = "Snake"
+		path = "./app"

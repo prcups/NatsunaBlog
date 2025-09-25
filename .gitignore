@@ -11,5 +11,4 @@ frontend/package-lock.json
 backend/log/
 backend/static/
 backend/public/
-backend/config/config.toml
 backend/blog

@@ -1,12 +1,12 @@
 package router
 
 import (
-	"backend/app/api/check"
-	"backend/app/api/image"
-	"backend/app/service/classify"
-	"backend/app/service/middleware"
-	"backend/app/service/post"
-	"backend/app/service/timeline"
+	"blog/app/api/check"
+	"blog/app/api/image"
+	"blog/app/service/classify"
+	"blog/app/service/middleware"
+	"blog/app/service/post"
+	"blog/app/service/timeline"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"
 )

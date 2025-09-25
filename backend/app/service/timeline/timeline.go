@@ -1,7 +1,7 @@
 package timeline
 
 import (
-	"backend/app/dao"
+	"blog/app/dao"
 	"github.com/gogf/gf/v2/net/ghttp"
 )
 
@@ -16,7 +16,7 @@ type GetPostsElement struct {
 
 // 获取所有归档
 func GetAllTimeLine(r *ghttp.Request) {
-	timeline, err := dao.DBBLOGPOST.Ctx(r.GetCtx()).Where("hid = ?", 0).Array("distinct timeline")
+	timeline, err := dao.DbBlogPost.Ctx(r.GetCtx()).Where("hid = ?", 0).Array("distinct timeline")
 	if err != nil {
 		r.Response.WritelnExit("GETALLTIMELINE: " + err.Error())
 	}
@@ -27,7 +27,7 @@ func GetAllTimeLine(r *ghttp.Request) {
 func GetPostsOfTimeLine(r *ghttp.Request) {
 	timeline := r.Get("timeline").String()
 	var posts []GetPostsElement
-	dao.DBBLOGPOST.Ctx(r.GetCtx()).Where("hid = ?", 0).Order("id desc").
+	dao.DbBlogPost.Ctx(r.GetCtx()).Where("hid = ?", 0).Order("id desc").
 		Scan(&posts, "timeline = ?", timeline)
 	r.Response.WriteJsonExit(posts)
 }

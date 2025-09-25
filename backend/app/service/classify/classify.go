@@ -1,7 +1,7 @@
 package classify
 
 import (
-	"backend/app/dao"
+	"blog/app/dao"
 	"github.com/gogf/gf/v2/net/ghttp"
 )
 
@@ -16,7 +16,7 @@ type GetPostsElement struct {
 
 // 获取所有分类
 func GetAllClassify(r *ghttp.Request) {
-	classify, err := dao.DBBLOGPOST.Ctx(r.GetCtx()).Where("hid = ?", 0).Array("distinct classify")
+	classify, err := dao.DbBlogPost.Ctx(r.GetCtx()).Where("hid = ?", 0).Array("distinct classify")
 	if err != nil {
 		r.Response.WritelnExit("GETALLCLASSIFY: " + err.Error())
 	}
@@ -27,7 +27,7 @@ func GetAllClassify(r *ghttp.Request) {
 func GetPostsOfClassify(r *ghttp.Request) {
 	classify := r.Get("classify").String()
 	var posts []GetPostsElement
-	dao.DBBLOGPOST.Ctx(r.GetCtx()).Where("hid = ?", 0).Order("id desc").
+	dao.DbBlogPost.Ctx(r.GetCtx()).Where("hid = ?", 0).Order("id desc").
 		Scan(&posts, "classify = ?", classify)
 	r.Response.WriteJsonExit(posts)
 }

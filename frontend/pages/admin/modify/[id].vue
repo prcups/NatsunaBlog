@@ -2,30 +2,28 @@
   <div>
     <div id="admin-edit-page" v-if="isChecked">
       <input id="admin-edit-title" v-model="post.title" placeholder="标题" />
-      <div id="admin-edit-container">
-        <md-editor
-            id="admin-edit-area"
-            @on-upload-img="onUploadImg"
-            v-model="post.content"
-            :toolbarsExclude="['save']"
+      <div id="admin-edit-area">
+        <MdEditor id="admin-editor"
+          @onUploadImg="onUploadImg"
+          @onInput="onInput"
+          v-model="post.content"
+          :toolbarsExclude="['save']"
         />
       </div>
-      <p>文章设置</p>
-      <div>
-        分类
-        <input v-model="post.classify" />
+      <div id="admin-edit-setting">
+        <div>分类：
+          <input v-model="post.classify" />
+        </div>
+        <div>标签：
+          <input v-model="post.tag" />
+        </div>
+        <div>置顶：
+          <input type="checkbox" v-model="post.ontop" />
+          隐藏：
+          <input type="checkbox" v-model="post.hid" />
+        </div>
       </div>
-      <div>
-        标签
-        <input v-model="post.tag" />
-      </div>
-      <div>
-        <input type="checkbox" v-model="post.ontop" />
-          置顶
-        <input type="checkbox" v-model="post.hid" />
-          隐藏
-      </div>
-      <button @click="summit">发布</button>
+      <button id="admin-edit-summit" @click="summit">发布</button>
     </div>
     <div v-else>
       <p>请先登录</p>
@@ -34,11 +32,26 @@
 </template>
 
 <script setup>
+import { MdEditor } from "md-editor-v3"
+import "md-editor-v3/lib/style.css"
+
+import { onMounted, onUnmounted } from 'vue';
+
+const handleBeforeUnload = (event) => {
+  event.preventDefault();
+};
+
 let config = useRuntimeConfig().public
 let user = ""
 let isChecked = false
+let edited = false
 const route = useRoute()
 const router = useRouter()
+
+onUnmounted(() => {
+  if (edited)
+    window.removeEventListener('beforeunload', handleBeforeUnload)
+});
 
 let post = reactive({
   title: "",
@@ -48,9 +61,6 @@ let post = reactive({
   ontop: 0,
   hid: 0
 })
-
-import MdEditor from "md-editor-v3"
-import "md-editor-v3/lib/style.css"
 
 const onUploadImg = async (files, callback) => {
   const res = await Promise.all(
@@ -69,6 +79,11 @@ const onUploadImg = async (files, callback) => {
   );
   callback(res.map((item) => config.GetImageBaseUrl + "/" + item.name));
 };
+
+const onInput = async () => {
+  edited = true
+  window.addEventListener('beforeunload', handleBeforeUnload)
+}
 
 async function summit() {
   await $fetch(config.UpdatePostUrl, {
@@ -126,25 +141,36 @@ if (process.client) {
 #admin-edit-page {
   display: flex;
   flex-direction: column;
-  text-align: center;
-  align-items: center;
+  justify-items: center;
+  max-width: 800px;
+  margin: auto;
 }
 
 #admin-edit-title {
   font-size: 1.2rem;
   text-align: center;
-}
-
-#admin-edit-container {
-  margin: 1rem 10rem 1rem 10rem;
+  margin: 1rem;
 }
 
 #admin-edit-area {
-  min-height: 64vh;
   text-align: left;
+  margin: 0 1rem 1rem 1rem;
 }
 
-#admin-edit-page > button {
-  margin: 10px;
+#admin-editor {
+  min-height: 60vh;
+  height: auto;
 }
+
+#admin-edit-setting {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 1rem 1rem 1rem;
+}
+
+#admin-edit-summit {
+  margin: 0 1rem 0 1rem;
+}
+
 </style>

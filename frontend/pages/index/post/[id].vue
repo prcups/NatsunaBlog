@@ -4,16 +4,14 @@
       <h1>{{ post.title }}</h1>
       <p>分类：{{ post.classify }} | 标签：{{ post.tag !== "" ? post.tag : "无" }}</p>
       <p>由 {{ post.author }} 于 {{ post.time }} 所写，被访问 {{ post.visit_times }} 次</p>
-      <markdown-it class="post-content" :source="post.content"></markdown-it>
+      <MdPreview class="post-content" :modelValue="post.content" />
     </div>
   </div>
 </template>
 
 <script setup>
-import markdownIt from 'vue3-markdown-it'
-import 'highlight.js/styles/monokai.css'
-
-defineNuxtComponent(markdownIt)
+import { MdPreview } from 'md-editor-v3'
+import 'md-editor-v3/lib/preview.css'
 
 const config = useRuntimeConfig().public
 
@@ -59,6 +57,7 @@ useHead({
 
 <style>
 .post-root {
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -68,22 +67,22 @@ useHead({
   width: 100%;
   text-align: center;
   margin-top: 1rem;
-  padding: 1rem 25% 2rem 25%;
   background-color: #c7b370;
-}
-
-@media screen and (max-width: 1200px) {
-  .post-box {
-    padding: 1rem 10% 2rem 10%;
-  }
+  box-sizing: border-box;
+  padding: 0 15% 0 15%;
 }
 
 .post-content {
   text-align: left;
+  background-color: transparent;
 }
 
 .post-content h1 {
   font-size: 1.5rem;
+}
+
+.md-editor-preview {
+  min-width: 0;
 }
 
 .post-content h1 {

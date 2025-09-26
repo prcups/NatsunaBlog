@@ -70,6 +70,7 @@ useHead({
   background-color: #c7b370;
   box-sizing: border-box;
   padding: 0 15% 0 15%;
+  z-index: 1;
 }
 
 .post-content {

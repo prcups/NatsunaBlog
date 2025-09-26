@@ -54,6 +54,7 @@ nav {
   flex-direction: row;
   justify-content: space-between;
   position: fixed;
+  z-index: 2;
 }
 
 #title {

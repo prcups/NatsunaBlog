@@ -12,3 +12,5 @@ backend/log/
 backend/static/
 backend/public/
 backend/blog
+output/
+output.tar.gz

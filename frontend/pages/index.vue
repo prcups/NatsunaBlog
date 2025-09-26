@@ -28,6 +28,21 @@
 <script setup>
 const config = useRuntimeConfig().public
 
+const navBackgroudColor = ref("transparent")
+
+const handleScroll = () => {
+  if (window.scrollY != 0) navBackgroudColor.value = "#1f3134"
+  else navBackgroudColor.value = "transparent"
+};
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll)
+});
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+});
+
 </script>
 
 <style>
@@ -55,6 +70,7 @@ nav {
   justify-content: space-between;
   position: fixed;
   z-index: 2;
+  background-color: v-bind('navBackgroudColor');
 }
 
 #title {

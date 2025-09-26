@@ -73,6 +73,12 @@ useHead({
   z-index: 1;
 }
 
+@media screen and (max-aspect-ratio: 3/4) {
+  .post-box {
+    padding: 0 5% 0 5%;
+  }
+}
+
 .post-content {
   text-align: left;
   background-color: transparent;
